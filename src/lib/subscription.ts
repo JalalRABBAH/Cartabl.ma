@@ -35,31 +35,33 @@ export function addDays(date: Date, days: number): Date {
 }
 
 export async function getSellerSubscription(userId: string): Promise<SellerSubscription | null> {
-  const sub = await prisma.subscription.findUnique({ where: { userId } });
-  if (sub) return sub;
+  const existing = await prisma.subscription.findUnique({ where: { userId } });
+  if (existing) return existing;
   const user = await prisma.user.findUnique({ where: { id: userId }, select: { role: true } });
   if (!user || user.role !== "SELLER") return null;
-  return prisma.subscription.create({
-    data: {
-      userId,
-      plan: "BASIC",
-      trialEndsAt: addDays(new Date(), SELLER_TRIAL_DAYS),
-      price: SELLER_PLAN_PRICE,
-    },
-  });
+  try {
+    return await prisma.subscription.create({
+      data: {
+        userId,
+        plan: "BASIC",
+        trialEndsAt: addDays(new Date(), SELLER_TRIAL_DAYS),
+        price: SELLER_PLAN_PRICE,
+      },
+    });
+  } catch (e: unknown) {
+    if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002") {
+      return prisma.subscription.findUnique({ where: { userId } });
+    }
+    throw e;
+  }
 }
 
 export async function activateSellerSubscription(userId: string): Promise<SellerSubscription> {
-  const existing = await prisma.subscription.findUnique({ where: { userId } });
   const paidUntil = addDays(new Date(), 365);
-  if (existing) {
-    return prisma.subscription.update({
-      where: { userId },
-      data: { paidUntil, updatedAt: new Date() },
-    });
-  }
-  return prisma.subscription.create({
-    data: {
+  return prisma.subscription.upsert({
+    where: { userId },
+    update: { paidUntil, updatedAt: new Date() },
+    create: {
       userId,
       plan: "BASIC",
       trialEndsAt: addDays(new Date(), SELLER_TRIAL_DAYS),
