@@ -10,6 +10,7 @@ import { deliveryDaysFor } from "@/lib/shipping";
 import { OrderTimeline } from "@/components/tracking/order-timeline";
 import { CopyButton } from "@/components/storefront/copy-button";
 import { Button } from "@/components/ui/button";
+import { GuestBanner } from "@/components/storefront/guest-banner";
 
 type Props = { params: Promise<{ number: string }>; searchParams: Promise<{ code?: string }> };
 
@@ -63,6 +64,12 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
           </Button>
         </div>
       </div>
+
+      {!order.userId && (
+        <div className="mt-8">
+          <GuestBanner />
+        </div>
+      )}
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">
         <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">

@@ -1,6 +1,7 @@
 import { getSessionUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { CheckoutForm } from "./checkout-form";
+import { GuestBanner } from "@/components/storefront/guest-banner";
 
 export default async function CheckoutPage() {
   const session = await getSessionUser();
@@ -10,5 +11,14 @@ export default async function CheckoutPage() {
         select: { name: true, email: true, phone: true, city: true, address: true },
       })
     : null;
-  return <CheckoutForm user={user} />;
+  return (
+    <>
+      {!user && (
+        <div className="container-site pt-8">
+          <GuestBanner />
+        </div>
+      )}
+      <CheckoutForm user={user} />
+    </>
+  );
 }

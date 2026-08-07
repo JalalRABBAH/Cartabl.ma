@@ -5,6 +5,7 @@ import { hashPassword } from "@/lib/password";
 import { createSession, SESSION_COOKIE } from "@/lib/auth";
 import { Role } from "@prisma/client";
 import { cookies } from "next/headers";
+import { addDays, SELLER_TRIAL_DAYS, SELLER_PLAN_PRICE } from "@/lib/subscription";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -13,11 +14,13 @@ const schema = z.object({
   password: z.string().min(6),
   city: z.string().optional(),
   address: z.string().optional(),
+  role: z.nativeEnum(Role).optional().default(Role.BUYER),
 });
 
 export async function POST(req: NextRequest) {
   try {
     const body = schema.parse(await req.json());
+    const role = body.role === Role.DELIVERY || body.role === Role.SELLER ? body.role : Role.BUYER;
     const email = body.email.toLowerCase().trim();
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
@@ -29,11 +32,21 @@ export async function POST(req: NextRequest) {
         email,
         phone: body.phone || null,
         passwordHash: hashPassword(body.password),
-        role: Role.BUYER,
+        role,
         city: body.city || null,
         address: body.address || null,
       },
     });
+    if (role === Role.SELLER) {
+      await prisma.subscription.create({
+        data: {
+          userId: user.id,
+          plan: "BASIC",
+          trialEndsAt: addDays(new Date(), SELLER_TRIAL_DAYS),
+          price: SELLER_PLAN_PRICE,
+        },
+      });
+    }
     const token = await createSession({ id: user.id, email: user.email, name: user.name, role: user.role });
     const store = await cookies();
     store.set(SESSION_COOKIE, token, { httpOnly: true, sameSite: "lax", maxAge: 60 * 60 * 24 * 7, path: "/" });

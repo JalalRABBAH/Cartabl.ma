@@ -8,6 +8,7 @@ import { formatMAD } from "@/lib/utils";
 import { FREE_SHIPPING_THRESHOLD } from "@/lib/shipping";
 import { ProductArt } from "@/components/product-art";
 import { Button } from "@/components/ui/button";
+import { GuestBanner } from "@/components/storefront/guest-banner";
 import type { ProductCategory } from "@prisma/client";
 
 export default function CartPage() {
@@ -36,6 +37,10 @@ export default function CartPage() {
       <h1 className="text-2xl font-black text-gray-900 sm:text-3xl">
         {T("cart_title")} <span className="text-lg font-semibold text-gray-400">({count} {T("cart_items")})</span>
       </h1>
+
+      <div className="mt-6">
+        <GuestBanner />
+      </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
         <div className="space-y-4">

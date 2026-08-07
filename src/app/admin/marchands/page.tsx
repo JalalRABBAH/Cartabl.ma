@@ -4,6 +4,7 @@ import { getLocale } from "@/lib/locale-server";
 import { t } from "@/lib/i18n";
 import { formatMAD } from "@/lib/utils";
 import { allMerchantsStats, COMMISSION_RATE } from "@/lib/commission";
+import { subscriptionStatus, daysLeft } from "@/lib/subscription";
 
 export const dynamic = "force-dynamic";
 
@@ -11,13 +12,25 @@ export default async function AdminMerchantsPage() {
   const locale = await getLocale();
 
   const [sellers, statsMap] = await Promise.all([
-    prisma.user.findMany({ where: { role: "SELLER" }, orderBy: { createdAt: "desc" } }),
+    prisma.user.findMany({ where: { role: "SELLER" }, orderBy: { createdAt: "desc" }, include: { subscription: true } }),
     allMerchantsStats(),
   ]);
 
   const rows = sellers
-    .map((s) => ({ user: s, stats: statsMap[s.id] }))
+    .map((s) => ({
+      user: s,
+      stats: statsMap[s.id],
+      subStatus: subscriptionStatus(s.subscription),
+      subDaysLeft: daysLeft(s.subscription),
+    }))
     .sort((a, b) => b.stats.commission - a.stats.commission);
+
+  const subBadge = (status: string, days: number) => {
+    if (status === "ACTIVE") return <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">{t(locale, "sub_active")}</span>;
+    if (status === "TRIAL") return <span className="inline-flex rounded-full bg-sand-50 px-2.5 py-1 text-xs font-bold text-sand-700">{t(locale, "sub_days_left", { days })}</span>;
+    if (status === "EXPIRED") return <span className="inline-flex rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-700">{t(locale, "sub_expired")}</span>;
+    return <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-500">{t(locale, "sub_none")}</span>;
+  };
 
   const totals = rows.reduce(
     (acc, r) => ({
@@ -67,6 +80,11 @@ export default async function AdminMerchantsPage() {
               <th className="px-5 py-3">{locale === "ar" ? "التاجر" : "Marchand"}</th>
               <th className="px-5 py-3">
                 <span className="inline-flex items-center gap-1">
+                  <Store className="h-3.5 w-3.5" /> {t(locale, "admin_merchant_sub")}
+                </span>
+              </th>
+              <th className="px-5 py-3">
+                <span className="inline-flex items-center gap-1">
                   <Boxes className="h-3.5 w-3.5" /> {t(locale, "admin_merchant_products_count")}
                 </span>
               </th>
@@ -95,12 +113,12 @@ export default async function AdminMerchantsPage() {
           <tbody className="divide-y divide-gray-50">
             {rows.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center text-sm text-gray-400">
+                <td colSpan={7} className="px-5 py-10 text-center text-sm text-gray-400">
                   {t(locale, "admin_users_empty")}
                 </td>
               </tr>
             )}
-            {rows.map(({ user, stats }) => (
+            {rows.map(({ user, stats, subStatus, subDaysLeft }) => (
               <tr key={user.id} className="transition hover:bg-gray-50/60">
                 <td className="px-5 py-3.5">
                   <div className="flex items-center gap-3">
@@ -113,6 +131,7 @@ export default async function AdminMerchantsPage() {
                     </div>
                   </div>
                 </td>
+                <td className="px-5 py-3.5">{subBadge(subStatus, subDaysLeft)}</td>
                 <td className="px-5 py-3.5">
                   <span className="font-semibold text-gray-700">{stats.activeProducts}</span>
                   <span className="text-xs text-gray-400"> / {stats.products}</span>

@@ -10,6 +10,7 @@ import { StatusBadge } from "@/components/tracking/order-timeline";
 import { LogoutButton } from "@/components/storefront/logout-button";
 import { ProfileForm } from "@/components/storefront/profile-form";
 import { CancelOrderButton } from "@/components/storefront/cancel-order-button";
+import { RoleAvatar, RoleBadge } from "@/components/storefront/role-identity";
 import { cn } from "@/lib/utils";
 
 export default async function AccountPage() {
@@ -31,13 +32,14 @@ export default async function AccountPage() {
     <div className="container-site max-w-5xl py-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <span className="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 text-2xl font-black text-white shadow-lg">
-            {dbUser?.name.charAt(0) ?? "?"}
-          </span>
+          <RoleAvatar role={user.role} initial={dbUser?.name.charAt(0) ?? "?"} size="lg" />
           <div>
             <p className="text-sm text-gray-400">{t(locale, "account_welcome")} 👋</p>
             <h1 className="text-2xl font-black text-gray-900">{dbUser?.name}</h1>
             <p className="text-sm text-gray-500">{dbUser?.email}</p>
+            <div className="mt-1.5">
+              <RoleBadge role={user.role} locale={locale} />
+            </div>
           </div>
         </div>
         <LogoutButton />

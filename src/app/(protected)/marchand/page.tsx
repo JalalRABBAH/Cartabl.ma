@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wallet, ClipboardList, Clock, PackageCheck, TrendingUp, AlertTriangle, Star, Percent, Banknote } from "lucide-react";
+import { Wallet, ClipboardList, Clock, PackageCheck, TrendingUp, AlertTriangle, Star, Percent, Banknote, Sparkles, CheckCircle2 } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
 import { getSessionUser } from "@/lib/auth";
@@ -9,11 +9,15 @@ import { OrderStatus } from "@prisma/client";
 import { StatusBadge } from "@/components/tracking/order-timeline";
 import { StatusDonut } from "@/components/merchant/status-donut";
 import { merchantStats, COMMISSION_RATE } from "@/lib/commission";
+import { getSellerSubscription, subscriptionStatus, daysLeft } from "@/lib/subscription";
 
 export default async function MerchantOverviewPage() {
   const locale = await getLocale();
   const session = await getSessionUser();
   const commission = await merchantStats(session?.id ?? "");
+  const sub = await getSellerSubscription(session?.id ?? "");
+  const subStatus = subscriptionStatus(sub);
+  const subDaysLeft = daysLeft(sub);
 
   const [deliveredAgg, totalOrders, pendingCount, inFlow, recentOrders, topProducts, lowStock] =
     await Promise.all([
@@ -85,6 +89,42 @@ export default async function MerchantOverviewPage() {
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-black text-gray-900">{t(locale, "merchant_overview")}</h1>
+
+      {subStatus === "TRIAL" && (
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-sand-200 bg-gradient-to-br from-sand-50 to-white p-5 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sand-500 text-white">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-bold text-gray-900">
+                {t(locale, "sub_trial_banner")} <span className="text-sand-700">{t(locale, "sub_days_left", { days: subDaysLeft })}</span>
+              </p>
+              <p className="text-xs text-gray-500">{t(locale, "sub_trial_free")} · {t(locale, "sub_price")}</p>
+            </div>
+          </div>
+          <Link href="/marchand/abonnement" className="rounded-xl bg-sand-500 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-sand-600">
+            {t(locale, "sub_cta")}
+          </Link>
+        </div>
+      )}
+
+      {subStatus === "ACTIVE" && sub?.paidUntil && (
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500 text-white">
+              <CheckCircle2 className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-bold text-gray-900">{t(locale, "sub_active")}</p>
+              <p className="text-xs text-gray-500">{t(locale, "sub_active_until")} {new Intl.DateTimeFormat(locale === "ar" ? "ar-MA" : "fr-FR", { day: "numeric", month: "long", year: "numeric" }).format(sub.paidUntil)}</p>
+            </div>
+          </div>
+          <Link href="/marchand/abonnement" className="rounded-xl border border-emerald-200 bg-white px-5 py-3 text-sm font-bold text-emerald-700 shadow-sm transition hover:bg-emerald-50">
+            {t(locale, "sub_manage")}
+          </Link>
+        </div>
+      )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
