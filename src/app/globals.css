@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans Arabic", Tahoma, sans-serif;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dce7fe;
+  --color-brand-200: #c0d4fe;
+  --color-brand-300: #94b7fc;
+  --color-brand-400: #6192f8;
+  --color-brand-500: #3b6df3;
+  --color-brand-600: #254be7;
+  --color-brand-700: #1d38d5;
+  --color-brand-800: #1e30ac;
+  --color-brand-900: #1e2d88;
+
+  --color-sand-50: #fdf9f3;
+  --color-sand-100: #faf1e2;
+  --color-sand-200: #f4e0c2;
+  --color-sand-300: #ecca97;
+  --color-sand-400: #e2ac66;
+  --color-sand-500: #d98f42;
+  --color-sand-600: #c97635;
+  --color-sand-700: #a75c2d;
+  --color-sand-800: #864a2b;
+  --color-sand-900: #6d3e25;
+}
+
+@layer base {
+  * {
+    border-color: theme(--color-gray-200);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-feature-settings: "kern";
+  }
+  ::selection {
+    @apply bg-brand-600 text-white;
+  }
+}
+
+@utility container-site {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility zellige {
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0 6%, transparent 7%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.06) 0 6%, transparent 7%),
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.05) 0 10%, transparent 11%);
+  background-size: 96px 96px;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@utility animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: theme(--color-gray-100);
+}
+::-webkit-scrollbar-thumb {
+  background: theme(--color-gray-300);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme(--color-gray-400);
+}

@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  BUYER
+  SELLER
+  DELIVERY
+  ADMIN
+}
+
+enum ProductCategory {
+  CLASSIQUE
+  DOS
+  ROULETTES
+  COLLEGE
+  PC
+  TROUSSE
+  ACCESSOIRE
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  HANDED_TO_DELIVERY
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELED
+  RETURNED
+}
+
+model User {
+  id           String  @id @default(cuid())
+  name         String
+  email        String  @unique
+  phone        String?
+  passwordHash String
+  role         Role    @default(BUYER)
+  city         String?
+  address      String?
+  active       Boolean @default(true)
+  createdAt    DateTime @default(now())
+
+  orders     Order[]
+  reviews    Review[]
+  products   Product[]
+  deliveries DeliveryAssignment[]
+
+  @@map("users")
+}
+
+model Product {
+  id             String          @id @default(cuid())
+  slug           String          @unique
+  name           String
+  nameAr         String
+  description    String
+  descriptionAr  String
+  category       ProductCategory
+  brand          String
+  price          Int
+  compareAtPrice Int?
+  stock          Int             @default(0)
+  colorsJson     String          @default("[]")
+  level          String?
+  featured       Boolean         @default(false)
+  active         Boolean         @default(true)
+  rating         Float           @default(0)
+  ratingCount    Int             @default(0)
+  sold           Int             @default(0)
+  sellerId       String?
+  seller         User?           @relation(fields: [sellerId], references: [id])
+  createdAt      DateTime        @default(now())
+
+  orderItems OrderItem[]
+  reviews    Review[]
+  cartItems  CartItem[]
+
+  @@map("products")
+}
+
+model Review {
+  id        String  @id @default(cuid())
+  rating    Int
+  comment   String
+  productId String
+  userId    String
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@map("reviews")
+}
+
+model CartItem {
+  id        String @id @default(cuid())
+  sessionId String
+  userId    String?
+  productId String
+  quantity  Int
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@map("cart_items")
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  number        String      @unique
+  trackingCode  String      @unique
+  userId        String?
+  customerName  String
+  customerPhone String
+  customerEmail String?
+  city          String
+  address       String
+  notes         String?
+  paymentMethod String      @default("COD")
+  subtotal      Int
+  shippingFee   Int
+  discount      Int         @default(0)
+  total         Int
+  status        OrderStatus @default(PENDING)
+  deliveryNote  String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  deliveredAt   DateTime?
+
+  user     User?        @relation(fields: [userId], references: [id])
+  items    OrderItem[]
+  events   StatusEvent[]
+  delivery DeliveryAssignment?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String @id @default(cuid())
+  orderId     String
+  productId   String?
+  productName String
+  productSlug String
+  color       String?
+  quantity    Int
+  unitPrice   Int
+  total       Int
+
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model StatusEvent {
+  id        String      @id @default(cuid())
+  orderId   String
+  status    OrderStatus
+  actor     String
+  actorName String?
+  note      String?
+  createdAt DateTime    @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("status_events")
+}
+
+model DeliveryAssignment {
+  id         String @id @default(cuid())
+  orderId    String @unique
+  deliveryId String
+  createdAt  DateTime @default(now())
+
+  order    Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  delivery User  @relation(fields: [deliveryId], references: [id])
+
+  @@map("delivery_assignments")
+}
+
+model Subscriber {
+  id        String @id @default(cuid())
+  email     String @unique
+  createdAt DateTime @default(now())
+
+  @@map("subscribers")
+}
