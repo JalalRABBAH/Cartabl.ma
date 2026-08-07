@@ -286,6 +286,7 @@ const messages = {
 
   admin_merchant_sub: ["Abonnement", "الاشتراك"],
   merchant_sub_status: ["Abonnement", "الاشتراك"],
+  back_to_space: ["Retour à mon espace", "العودة إلى مساحتي"],
 
   merchant_title: ["Espace marchand", "فضاء التاجر"],
   merchant_overview: ["Tableau de bord", "لوحة القيادة"],

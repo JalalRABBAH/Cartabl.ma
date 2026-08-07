@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PackageSearch, Truck } from "lucide-react";
+import { PackageSearch, Truck, LayoutDashboard } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
+import { getSessionUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
 import { formatMAD } from "@/lib/utils";
 import { deliveryDaysFor } from "@/lib/shipping";
+import { homePathFor, isBuyerFlowRole } from "@/lib/role-nav";
 import { OrderTimeline, StatusBadge } from "@/components/tracking/order-timeline";
 import { TrackForm } from "@/components/storefront/track-form";
 import { CopyButton } from "@/components/storefront/copy-button";
@@ -20,6 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TrackCodePage({ params }: Props) {
   const locale = await getLocale();
+  const session = await getSessionUser();
+  const buyerFlow = isBuyerFlowRole(session?.role);
   const { code } = await params;
   const normalized = code.toUpperCase();
 
@@ -106,10 +110,11 @@ export default async function TrackCodePage({ params }: Props) {
           </div>
 
           <Link
-            href="/produits"
+            href={buyerFlow ? "/produits" : homePathFor(session?.role)}
             className="flex items-center justify-center gap-2 rounded-2xl border border-gray-200 py-3 text-sm font-semibold text-gray-600 transition hover:border-brand-300 hover:text-brand-600"
           >
-            <PackageSearch className="h-4 w-4" /> {t(locale, "cart_continue")}
+            {buyerFlow ? <PackageSearch className="h-4 w-4" /> : <LayoutDashboard className="h-4 w-4" />}
+            {buyerFlow ? t(locale, "cart_continue") : t(locale, "back_to_space")}
           </Link>
         </div>
       </div>

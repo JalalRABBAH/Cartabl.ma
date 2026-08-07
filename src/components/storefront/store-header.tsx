@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Package, MapPin, Menu, X, User, Truck, Store, Search } from "lucide-react";
+import { Package, MapPin, Menu, X, User, Truck, Store, Search, ShieldCheck } from "lucide-react";
 import { getLocale } from "@/lib/locale-server";
 import { t } from "@/lib/i18n";
 import { getSessionUser } from "@/lib/auth";
+import { homePathFor } from "@/lib/role-nav";
 import { SearchBox } from "./search-box";
 import { LanguageSwitcher } from "./language-switcher";
 import { CartButton } from "./cart-button";
@@ -66,11 +67,19 @@ export async function StoreHeader() {
           </div>
           {user ? (
             <Link
-              href="/compte"
+              href={homePathFor(user.role)}
               className="hidden h-11 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 shadow-sm transition hover:border-brand-300 sm:flex"
               title={user.name}
             >
-              <User className="h-4 w-4 text-brand-600" />
+              {user.role === "SELLER" ? (
+                <Store className="h-4 w-4 text-sand-600" />
+              ) : user.role === "DELIVERY" ? (
+                <Truck className="h-4 w-4 text-sky-600" />
+              ) : user.role === "ADMIN" ? (
+                <ShieldCheck className="h-4 w-4 text-indigo-600" />
+              ) : (
+                <User className="h-4 w-4 text-brand-600" />
+              )}
               <span className="max-w-28 truncate">{user.name.split(" ")[0]}</span>
             </Link>
           ) : (

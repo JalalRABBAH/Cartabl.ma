@@ -18,7 +18,8 @@ import { formatMAD, cn } from "@/lib/utils";
 import { CITIES, FREE_SHIPPING_THRESHOLD, deliveryDaysFor } from "@/lib/shipping";
 import { ProductArt } from "@/components/product-art";
 import { Button } from "@/components/ui/button";
-import type { ProductCategory } from "@prisma/client";
+import { homePathFor, isBuyerFlowRole } from "@/lib/role-nav";
+import type { ProductCategory, Role } from "@prisma/client";
 
 export type CheckoutUser = {
   name: string;
@@ -28,10 +29,11 @@ export type CheckoutUser = {
   address: string | null;
 };
 
-export function CheckoutForm({ user }: { user: CheckoutUser | null }) {
+export function CheckoutForm({ user, role }: { user: CheckoutUser | null; role: Role | null }) {
   const router = useRouter();
   const { items, subtotal, clear } = useCart();
   const { T, locale } = useLocale();
+  const buyerFlow = isBuyerFlowRole(role);
 
   const [form, setForm] = useState({
     customerName: user?.name ?? "",
@@ -226,8 +228,8 @@ export function CheckoutForm({ user }: { user: CheckoutUser | null }) {
               T("checkout_place")
             )}
           </Button>
-          <Link href="/panier" className="mt-3 block text-center text-sm font-semibold text-gray-400 hover:text-brand-600">
-            {T("checkout_back")}
+          <Link href={buyerFlow ? "/panier" : homePathFor(role)} className="mt-3 block text-center text-sm font-semibold text-gray-400 hover:text-brand-600">
+            {buyerFlow ? T("checkout_back") : T("back_to_space")}
           </Link>
         </aside>
       </form>

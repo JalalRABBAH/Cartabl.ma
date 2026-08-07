@@ -18,7 +18,7 @@ export default async function CheckoutPage() {
           <GuestBanner />
         </div>
       )}
-      <CheckoutForm user={user} />
+      <CheckoutForm user={user} role={session?.role ?? null} />
     </>
   );
 }

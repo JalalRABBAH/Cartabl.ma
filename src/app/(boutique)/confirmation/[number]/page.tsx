@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle2, Truck, Home } from "lucide-react";
+import { CheckCircle2, Truck, Home, LayoutDashboard } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
+import { getSessionUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
 import { formatMAD } from "@/lib/utils";
 import { deliveryDaysFor } from "@/lib/shipping";
+import { homePathFor, isBuyerFlowRole } from "@/lib/role-nav";
 import { OrderTimeline } from "@/components/tracking/order-timeline";
 import { CopyButton } from "@/components/storefront/copy-button";
 import { Button } from "@/components/ui/button";
@@ -16,6 +18,8 @@ type Props = { params: Promise<{ number: string }>; searchParams: Promise<{ code
 
 export default async function ConfirmationPage({ params, searchParams }: Props) {
   const locale = await getLocale();
+  const session = await getSessionUser();
+  const buyerFlow = isBuyerFlowRole(session?.role);
   const { number } = await params;
   const sp = await searchParams;
 
@@ -58,8 +62,9 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
             </Link>
           </Button>
           <Button size="lg" variant="outline">
-            <Link href="/produits" className="flex items-center gap-2">
-              <Home className="h-4 w-4" /> {t(locale, "order_back_home")}
+            <Link href={buyerFlow ? "/produits" : homePathFor(session?.role)} className="flex items-center gap-2">
+              {buyerFlow ? <Home className="h-4 w-4" /> : <LayoutDashboard className="h-4 w-4" />}
+              {buyerFlow ? t(locale, "order_back_home") : t(locale, "back_to_space")}
             </Link>
           </Button>
         </div>
