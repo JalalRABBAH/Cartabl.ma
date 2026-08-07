@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UserPlus, Loader2, User, Lock, Phone, MapPin, Mail, ShoppingBag, Store, Truck, Check } from "lucide-react";
 import { useLocale } from "@/app/providers";
@@ -41,7 +40,6 @@ const accountTypes: { value: AccountType; labelKey: "reg_role_buyer" | "reg_role
 
 export function RegisterForm() {
   const { T } = useLocale();
-  const router = useRouter();
   const [role, setRole] = useState<AccountType>("BUYER");
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "", city: "Casablanca", address: "" });
   const [loading, setLoading] = useState(false);
@@ -62,8 +60,7 @@ export function RegisterForm() {
         setError(res.status === 409 ? T("auth_exists") : T("auth_invalid"));
         return;
       }
-      router.refresh();
-      router.push(data.role === "SELLER" ? "/marchand" : data.role === "DELIVERY" ? "/livreur" : "/compte");
+      window.location.href = data.role === "SELLER" ? "/marchand" : data.role === "DELIVERY" ? "/livreur" : "/compte";
     } catch {
       setError(T("auth_error"));
     } finally {

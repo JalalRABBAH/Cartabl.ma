@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { LogIn, Loader2, User, Lock, Sparkles } from "lucide-react";
 import { useLocale } from "@/app/providers";
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
   const { T } = useLocale();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/compte";
 
@@ -38,8 +37,7 @@ export function LoginForm() {
         setError(T("auth_invalid"));
         return;
       }
-      router.refresh();
-      router.push(next);
+      window.location.href = next;
     } catch {
       setError(T("auth_error"));
     } finally {
