@@ -1,15 +1,19 @@
 import Link from "next/link";
-import { Wallet, ClipboardList, Clock, PackageCheck, TrendingUp, AlertTriangle, Star } from "lucide-react";
+import { Wallet, ClipboardList, Clock, PackageCheck, TrendingUp, AlertTriangle, Star, Percent, Banknote } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
+import { getSessionUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
 import { formatMAD } from "@/lib/utils";
 import { OrderStatus } from "@prisma/client";
 import { StatusBadge } from "@/components/tracking/order-timeline";
 import { StatusDonut } from "@/components/merchant/status-donut";
+import { merchantStats, COMMISSION_RATE } from "@/lib/commission";
 
 export default async function MerchantOverviewPage() {
   const locale = await getLocale();
+  const session = await getSessionUser();
+  const commission = await merchantStats(session?.id ?? "");
 
   const [deliveredAgg, totalOrders, pendingCount, inFlow, recentOrders, topProducts, lowStock] =
     await Promise.all([
@@ -92,6 +96,41 @@ export default async function MerchantOverviewPage() {
             <p className="text-sm text-gray-500">{s.label}</p>
           </div>
         ))}
+      </div>
+
+      <div className="rounded-3xl border border-amber-100 bg-gradient-to-br from-amber-50 to-white p-6 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h2 className="flex items-center gap-2 text-lg font-bold text-gray-900">
+              <Percent className="h-5 w-5 text-amber-500" /> {t(locale, "merchant_commission_title")}
+            </h2>
+            <p className="mt-1 text-xs text-gray-500">{t(locale, "merchant_commission_rate")}</p>
+          </div>
+          <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-black text-amber-700">
+            {Math.round(COMMISSION_RATE * 100)}%
+          </span>
+        </div>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          <div>
+            <p className="text-xs font-semibold text-gray-500">{t(locale, "merchant_my_sales")}</p>
+            <p className="mt-0.5 text-2xl font-black text-gray-900">{formatMAD(commission.sales)}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-gray-500">{t(locale, "merchant_commission_amount")}</p>
+            <p className="mt-0.5 flex items-center gap-1.5 text-2xl font-black text-amber-600">
+              <Percent className="h-5 w-5" /> {formatMAD(commission.commission)}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-gray-500">{t(locale, "merchant_net_revenue")}</p>
+            <p className="mt-0.5 flex items-center gap-1.5 text-2xl font-black text-emerald-600">
+              <Banknote className="h-5 w-5" /> {formatMAD(commission.net)}
+            </p>
+          </div>
+        </div>
+        <p className="mt-4 rounded-xl bg-amber-100/60 px-3 py-2 text-xs font-semibold text-amber-700">
+          {t(locale, "admin_commission_note")}
+        </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

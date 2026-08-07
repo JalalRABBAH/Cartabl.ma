@@ -16,6 +16,7 @@ export default async function AdminLayout({
 
   const tabs = [
     { href: "/admin", label: t(locale, "admin_overview"), icon: "LayoutDashboard" },
+    { href: "/admin/marchands", label: t(locale, "admin_merchants_title"), icon: "Store" },
     { href: "/admin/utilisateurs", label: t(locale, "admin_users_page_title"), icon: "Users" },
     { href: "/admin/abonnes", label: t(locale, "admin_subscribers_title"), icon: "Mail" },
   ] as const;

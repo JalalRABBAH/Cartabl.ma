@@ -3,6 +3,7 @@ import { getLocale } from "@/lib/locale-server";
 import { getSessionUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
 import { UsersTable } from "@/components/admin/users-table";
+import { allMerchantsStats } from "@/lib/commission";
 
 export const dynamic = "force-dynamic";
 
@@ -10,10 +11,13 @@ export default async function AdminUsersPage() {
   const locale = await getLocale();
   const session = await getSessionUser();
 
-  const users = await prisma.user.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 100,
-  });
+  const [users, merchantsStats] = await Promise.all([
+    prisma.user.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 100,
+    }),
+    allMerchantsStats(),
+  ]);
 
   return (
     <div className="space-y-6">
@@ -31,6 +35,8 @@ export default async function AdminUsersPage() {
           role: u.role,
           active: u.active,
           createdAt: u.createdAt.toISOString(),
+          sales: u.role === "SELLER" ? merchantsStats[u.id]?.sales : undefined,
+          commission: u.role === "SELLER" ? merchantsStats[u.id]?.commission : undefined,
         }))}
       />
     </div>

@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ClipboardList, Boxes, Users, Mail } from "lucide-react";
+import { LayoutDashboard, ClipboardList, Boxes, Users, Mail, Store } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const ICONS = { LayoutDashboard, ClipboardList, Boxes, Users, Mail } as const;
+const ICONS = { LayoutDashboard, ClipboardList, Boxes, Users, Mail, Store } as const;
 
 export type NavTab = {
   href: string;

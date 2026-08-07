@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, AlertCircle, Loader2, Ban, Check } from "lucide-react";
+import { CheckCircle2, AlertCircle, Loader2, Ban, Check, Percent } from "lucide-react";
 import { useLocale } from "@/app/providers";
-import { cn } from "@/lib/utils";
+import { cn, formatMAD } from "@/lib/utils";
 import type { MessageKey } from "@/lib/i18n";
 
 export type AdminUser = {
@@ -15,6 +15,8 @@ export type AdminUser = {
   role: string;
   active: boolean;
   createdAt: string;
+  sales?: number;
+  commission?: number;
 };
 
 const ROLES = ["BUYER", "SELLER", "DELIVERY", "ADMIN"] as const;
@@ -67,11 +69,12 @@ export function UsersTable({ users, selfId }: { users: AdminUser[]; selfId: stri
   return (
     <div>
       <div className="overflow-x-auto rounded-3xl border border-gray-100 bg-white shadow-sm">
-        <table className="w-full min-w-[720px] text-sm">
+        <table className="w-full min-w-[820px] text-sm">
           <thead>
             <tr className="border-b border-gray-100 text-left text-xs font-semibold uppercase tracking-wide text-gray-400">
               <th className="px-5 py-3">{locale === "ar" ? "الاسم" : "Nom"}</th>
               <th className="px-5 py-3">{T("admin_user_role")}</th>
+              <th className="px-5 py-3">{T("admin_merchant_commission")}</th>
               <th className="px-5 py-3">{T("admin_user_created")}</th>
               <th className="px-5 py-3">{T("admin_user_status")}</th>
               <th className="px-5 py-3 text-right">{T("merchant_actions")}</th>
@@ -97,6 +100,16 @@ export function UsersTable({ users, selfId }: { users: AdminUser[]; selfId: stri
                       </option>
                     ))}
                   </select>
+                </td>
+                <td className="px-5 py-3.5">
+                  {u.role === "SELLER" ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-black text-amber-700">
+                      <Percent className="h-3 w-3" />
+                      5% · {formatMAD(u.commission ?? 0)}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-gray-300">—</span>
+                  )}
                 </td>
                 <td className="px-5 py-3.5 text-xs text-gray-500">
                   {new Intl.DateTimeFormat(locale === "ar" ? "ar-MA" : "fr-MA", {
