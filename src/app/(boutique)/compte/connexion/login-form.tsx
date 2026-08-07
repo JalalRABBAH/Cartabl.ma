@@ -18,9 +18,10 @@ export function LoginForm() {
   const [error, setError] = useState("");
 
   const demo = [
-    { label: `${T("auth_demo_buyer")}`, email: "aya@demo.ma", icon: "🛍️" },
-    { label: `${T("auth_demo_seller")}`, email: "rachid@demo.ma", icon: "🏪" },
-    { label: `${T("auth_demo_delivery")}`, email: "youssef@demo.ma", icon: "🚚" },
+    { label: `${T("auth_demo_buyer")}`, email: "aya@demo.ma", password: "demo1234", icon: "🛍️" },
+    { label: `${T("auth_demo_seller")}`, email: "rachid@demo.ma", password: "demo1234", icon: "🏪" },
+    { label: `${T("auth_demo_delivery")}`, email: "youssef@demo.ma", password: "demo1234", icon: "🚚" },
+    { label: `${T("auth_demo_admin")}`, email: "admin@demo.ma", password: "admin1234", icon: "🛡️" },
   ];
 
   const submit = async (email = form.email, password = form.password) => {
@@ -103,7 +104,7 @@ export function LoginForm() {
             {demo.map((d) => (
               <button
                 key={d.email}
-                onClick={() => submit(d.email, "demo1234")}
+                onClick={() => submit(d.email, d.password)}
                 className="flex cursor-pointer items-center justify-between rounded-xl bg-white px-4 py-3 text-left shadow-sm transition hover:shadow"
               >
                 <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
