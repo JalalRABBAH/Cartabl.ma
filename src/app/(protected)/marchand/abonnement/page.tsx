@@ -41,7 +41,7 @@ export default async function SubscriptionPage() {
       <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
         <div className="bg-gradient-to-br from-sand-500 to-sand-700 px-8 py-10 text-white">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-sand-100">
-            <Store className="h-4 w-4" /> Cartabl.ma
+            <Store className="h-4 w-4" /> Mbag.ma
           </div>
           <h1 className="mt-2 text-3xl font-black">{t(locale, "sub_page_title")}</h1>
           <p className="mt-1 text-sand-100">{t(locale, "sub_page_desc")}</p>

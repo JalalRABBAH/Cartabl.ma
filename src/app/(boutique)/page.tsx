@@ -11,16 +11,21 @@ import {
   Star,
   ArrowRight,
   BadgePercent,
+  Store,
+  MapPin,
+  MessageCircle,
 } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
 import { t, type Locale } from "@/lib/i18n";
 import { CATEGORY_META, ALL_CATEGORIES } from "@/lib/catalog";
 import { toCard, type CardProduct } from "@/lib/serialize";
+import { BLOG_POSTS, BLOG_RUBRIQUES, rubriqueFor } from "@/lib/blog";
 import { ProductCard } from "@/components/storefront/product-card";
 import { ProductArt } from "@/components/product-art";
 import { NewsletterForm } from "@/components/storefront/newsletter-form";
-import { formatMAD } from "@/lib/utils";
+import { CampaignSlider } from "@/components/storefront/campaign-slider";
+import { formatMAD, toWhatsAppNumber, waLink } from "@/lib/utils";
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -33,7 +38,7 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 async function getData() {
-  const [featured, newest, categoryCounts] = await Promise.all([
+  const [featured, newest, categoryCounts, topSellers] = await Promise.all([
     prisma.product.findMany({
       where: { featured: true, active: true },
       orderBy: { sold: "desc" },
@@ -49,28 +54,58 @@ async function getData() {
       where: { active: true },
       _count: { _all: true },
     }),
+    prisma.user.findMany({
+      where: { role: "SELLER", active: true, shopSlug: { not: null } },
+      select: {
+        id: true,
+        name: true,
+        shopName: true,
+        shopSlug: true,
+        city: true,
+        whatsapp: true,
+        phone: true,
+        products: {
+          where: { active: true },
+          select: { sold: true, id: true },
+        },
+      },
+    }),
   ]);
+
+  const ranked = topSellers
+    .map((s) => ({
+      ...s,
+      totalSold: s.products.reduce((acc, p) => acc + p.sold, 0),
+      productCount: s.products.length,
+    }))
+    .filter((s) => s.productCount > 0)
+    .sort((a, b) => b.totalSold - a.totalSold)
+    .slice(0, 6);
+
   return {
     featured: featured.map(toCard),
     newest: newest.map(toCard),
     counts: Object.fromEntries(categoryCounts.map((c) => [c.category, c._count._all])),
+    topSellers: ranked,
   };
 }
 
 export default async function HomePage() {
   const locale = await getLocale();
-  const { featured, newest, counts } = await getData();
+  const { featured, newest, counts, topSellers } = await getData();
 
   return (
     <div>
       <Hero locale={locale} featured={featured} />
-      <Marquee locale={locale} />
+      <CampaignSlider />
       <Categories locale={locale} counts={counts} />
+      <TopShops locale={locale} sellers={topSellers} />
       <FeaturedSection locale={locale} products={featured} />
       <PromoBanner locale={locale} />
       <HowItWorks locale={locale} />
       <WhyUs locale={locale} />
       <Testimonials locale={locale} />
+      <BlogSection locale={locale} />
       <Newsletter locale={locale} />
     </div>
   );
@@ -84,20 +119,20 @@ function Hero({ locale, featured }: { locale: Locale; featured: CardProduct[] })
       <div className="pointer-events-none absolute -start-24 -top-24 h-96 w-96 rounded-full bg-sand-400/20 blur-3xl" />
       <div className="pointer-events-none absolute -end-24 bottom-0 h-96 w-96 rounded-full bg-brand-400/20 blur-3xl" />
 
-      <div className="container-site relative grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+      <div className="container-site relative grid items-center gap-6 py-6 lg:grid-cols-2 lg:py-8">
         <div className="animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider backdrop-blur">
             <BadgePercent className="h-4 w-4 text-sand-300" />
             {t(locale, "hero_badge")}
           </span>
-          <h1 className="mt-6 text-balance text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-balance text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
             {t(locale, "hero_title")}{" "}
             <span className="bg-gradient-to-r from-sand-300 to-amber-200 bg-clip-text text-transparent">
               {t(locale, "hero_title_highlight")}
             </span>
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-brand-100/90">{t(locale, "hero_subtitle")}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <p className="mt-3 max-w-xl text-base text-brand-100/90">{t(locale, "hero_subtitle")}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
             <Link
               href="/produits"
               className="group inline-flex h-13 items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-bold text-brand-700 shadow-lg shadow-brand-900/30 transition hover:bg-brand-50"
@@ -113,7 +148,7 @@ function Hero({ locale, featured }: { locale: Locale; featured: CardProduct[] })
               {t(locale, "hero_cta2")}
             </Link>
           </div>
-          <div className="mt-10 flex flex-wrap gap-8">
+          <div className="mt-6 flex flex-wrap gap-6">
             {[
               { v: t(locale, "hero_stat1"), l: t(locale, "hero_stat1l") },
               { v: t(locale, "hero_stat2"), l: t(locale, "hero_stat2l") },
@@ -137,8 +172,13 @@ function Hero({ locale, featured }: { locale: Locale; featured: CardProduct[] })
                   i === 1 ? "translate-y-8" : ""
                 } ${i === 2 ? "-translate-y-4" : ""}`}
               >
-                <div className="animate-float-slow p-4" style={{ animationDelay: `${i * 0.8}s` }}>
-                  <ProductArt category={p.category as never} colors={p.colors} />
+                <div className="aspect-square w-full overflow-hidden bg-white/5 p-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={p.images[0] ?? p.imageUrl ?? ""}
+                    alt={p.name}
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-bold">{locale === "ar" ? p.nameAr : p.name}</p>
@@ -154,29 +194,6 @@ function Hero({ locale, featured }: { locale: Locale; featured: CardProduct[] })
         </div>
       </div>
     </section>
-  );
-}
-
-function Marquee({ locale }: { locale: Locale }) {
-  const items = [
-    t(locale, "footer_pay_cod"),
-    t(locale, "home_promo_title"),
-    "Casablanca · Rabat · Marrakech · Fès · Tanger · Agadir",
-    t(locale, "home_why1t"),
-    "📦 " + t(locale, "hero_stat3l"),
-  ];
-  const row = [...items, ...items];
-  return (
-    <div className="overflow-hidden border-b border-brand-100 bg-brand-50 py-3">
-      <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
-        {row.map((item, i) => (
-          <span key={i} className="flex items-center gap-2 text-sm font-semibold text-brand-800">
-            <Package className="h-4 w-4 text-brand-500" />
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -215,13 +232,99 @@ function Categories({ locale, counts }: { locale: Locale; counts: Record<string,
   );
 }
 
+type TopSeller = {
+  id: string;
+  name: string;
+  shopName: string | null;
+  shopSlug: string | null;
+  city: string | null;
+  whatsapp: string | null;
+  phone: string | null;
+  totalSold: number;
+  productCount: number;
+};
+
+const SELLER_COLORS = [
+  "from-brand-500 to-brand-700",
+  "from-sand-500 to-sand-700",
+  "from-emerald-500 to-emerald-700",
+  "from-violet-500 to-violet-700",
+  "from-sky-500 to-sky-700",
+  "from-rose-500 to-rose-700",
+];
+
+function TopShops({ locale, sellers }: { locale: Locale; sellers: TopSeller[] }) {
+  if (sellers.length === 0) return null;
+
+  return (
+    <section className="container-site py-16">
+      <div className="mb-8 flex items-end justify-between">
+        <div>
+          <h2 className="text-2xl font-black text-gray-900 sm:text-3xl">
+            {t(locale, "home_shops_title")}
+          </h2>
+          <p className="mt-1 text-gray-500">{t(locale, "home_shops_sub")}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {sellers.map((seller, i) => {
+          const displayName = seller.shopName ?? seller.name;
+          const colorClass = SELLER_COLORS[i % SELLER_COLORS.length];
+          return (
+            <Link
+              key={seller.id}
+              href={`/${seller.shopSlug}`}
+              className="group relative flex items-center gap-4 rounded-3xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg"
+            >
+              <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${colorClass} text-xl font-black text-white shadow-md transition group-hover:scale-110`}>
+                {displayName.charAt(0).toUpperCase()}
+              </span>
+              <div className="min-w-0 flex-1">
+                <h3 className="truncate text-base font-bold text-gray-900 group-hover:text-brand-700">
+                  {displayName}
+                </h3>
+                {seller.city && (
+                  <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-400">
+                    <MapPin className="h-3 w-3" /> {seller.city}
+                  </p>
+                )}
+                <div className="mt-2 flex items-center gap-3 text-xs text-gray-500">
+                  <span className="font-semibold text-brand-600">{seller.productCount} {t(locale, "home_shops_products")}</span>
+                  <span>·</span>
+                  <span>{seller.totalSold} vendus</span>
+                </div>
+              </div>
+              {seller.whatsapp && (
+                <a
+                  href={waLink(
+                    seller.whatsapp,
+                    locale === "ar"
+                      ? `مرحبا، لدي سؤال بخصوص متجر « ${displayName} » على Mbag.ma.`
+                      : `Bonjour, j'ai une question concernant la boutique « ${displayName} » sur Mbag.ma.`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 transition hover:bg-emerald-100"
+                  title="WhatsApp"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </a>
+              )}
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function FeaturedSection({ locale, products }: { locale: Locale; products: CardProduct[] }) {
   return (
-    <section className="bg-sand-50/60 py-16">
+    <section className="bg-sand-50/60 py-8">
       <div className="container-site">
-        <div className="mb-8 flex items-end justify-between">
+        <div className="mb-5 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl font-black text-gray-900 sm:text-3xl">
+            <h2 className="text-xl font-black text-gray-900 sm:text-2xl">
               {t(locale, "home_featured_title")}
             </h2>
             <p className="mt-1 text-gray-500">{t(locale, "home_featured_sub")}</p>
@@ -364,6 +467,56 @@ function Testimonials({ locale }: { locale: Locale }) {
             </div>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function BlogSection({ locale }: { locale: Locale }) {
+  const latest = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+  return (
+    <section className="bg-sand-50/60 py-8">
+      <div className="container-site">
+        <div className="mb-5 flex items-end justify-between">
+          <div>
+            <h2 className="text-xl font-black text-gray-900 sm:text-2xl">
+              📖 {t(locale, "nav_blog")}
+            </h2>
+            <p className="mt-1 text-gray-500">{t(locale, "blog_sub")}</p>
+          </div>
+          <Link
+            href="/blog"
+            className="hidden items-center gap-1 text-sm font-bold text-brand-600 hover:text-brand-700 sm:flex"
+          >
+            {t(locale, "blog_see_all")} <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+          {latest.map((post) => {
+            const content = locale === "ar" ? post.ar : post.fr;
+            const rub = BLOG_RUBRIQUES.find((r) => r.slug === post.rubrique)!;
+            return (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group flex flex-col rounded-3xl border border-gray-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg"
+              >
+                <span className="flex w-fit items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">
+                  <span>{rub.emoji}</span>
+                  {rubriqueFor(post.rubrique, locale)}
+                </span>
+                <h3 className="mt-3 text-base font-bold leading-snug text-gray-900 transition group-hover:text-brand-700">
+                  {content.title}
+                </h3>
+                <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-gray-500">{content.excerpt}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand-600">
+                  {t(locale, "blog_read")}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

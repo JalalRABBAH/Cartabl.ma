@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PackageSearch, ChevronRight } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
+import { getSessionUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
 import { formatMAD } from "@/lib/utils";
 import { StatusBadge } from "@/components/tracking/order-timeline";
@@ -9,9 +10,13 @@ import { OrderActions } from "@/components/merchant/order-actions";
 
 export default async function MerchantOrdersPage() {
   const locale = await getLocale();
+  const session = await getSessionUser();
+  const isAdmin = session?.role === "ADMIN";
+  const orderScope = isAdmin ? {} : { items: { some: { product: { sellerId: session?.id ?? "" } } } };
 
   const [orders, deliveries] = await Promise.all([
     prisma.order.findMany({
+      where: orderScope,
       include: { items: true, delivery: { include: { delivery: true } } },
       orderBy: { createdAt: "desc" },
       take: 60,

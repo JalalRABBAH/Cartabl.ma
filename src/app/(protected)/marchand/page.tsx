@@ -8,6 +8,7 @@ import { formatMAD } from "@/lib/utils";
 import { OrderStatus } from "@prisma/client";
 import { StatusBadge } from "@/components/tracking/order-timeline";
 import { StatusDonut } from "@/components/merchant/status-donut";
+import { ShopSettings } from "@/components/merchant/shop-settings";
 import { merchantStats, COMMISSION_RATE } from "@/lib/commission";
 import { getSellerSubscription, subscriptionStatus, daysLeft } from "@/lib/subscription";
 
@@ -18,16 +19,29 @@ export default async function MerchantOverviewPage() {
   const sub = await getSellerSubscription(session?.id ?? "");
   const subStatus = subscriptionStatus(sub);
   const subDaysLeft = daysLeft(sub);
+  const me = await prisma.user.findUnique({
+    where: { id: session?.id ?? "" },
+    select: { whatsapp: true, shopName: true, shopSlug: true },
+  });
+
+  const isAdmin = session?.role === "ADMIN";
+  const sellerId = isAdmin ? "" : session?.id ?? "";
+  const orderScope = isAdmin ? {} : { items: { some: { product: { sellerId } } } };
+  const productScope = isAdmin ? {} : { sellerId };
 
   const [deliveredAgg, totalOrders, pendingCount, inFlow, recentOrders, topProducts, lowStock] =
     await Promise.all([
-      prisma.order.aggregate({
-        where: { status: OrderStatus.DELIVERED },
+      prisma.orderItem.aggregate({
+        where: {
+          ...(isAdmin ? {} : { product: { sellerId } }),
+          order: { status: OrderStatus.DELIVERED },
+        },
         _sum: { total: true },
-        _count: true,
       }),
-      prisma.order.count(),
-      prisma.order.count({ where: { status: { in: [OrderStatus.PENDING, OrderStatus.CONFIRMED] } } }),
+      prisma.order.count({ where: orderScope }),
+      prisma.order.count({
+        where: { status: { in: [OrderStatus.PENDING, OrderStatus.CONFIRMED] }, ...orderScope },
+      }),
       prisma.order.count({
         where: {
           status: {
@@ -38,19 +52,30 @@ export default async function MerchantOverviewPage() {
               OrderStatus.OUT_FOR_DELIVERY,
             ],
           },
+          ...orderScope,
         },
       }),
       prisma.order.findMany({
+        where: orderScope,
         include: { items: true },
         orderBy: { createdAt: "desc" },
         take: 6,
       }),
-      prisma.product.findMany({ where: { active: true }, orderBy: { sold: "desc" }, take: 5 }),
-      prisma.product.findMany({ where: { active: true, stock: { lt: 10 } }, orderBy: { stock: "asc" }, take: 5 }),
+      prisma.product.findMany({
+        where: { active: true, ...productScope },
+        orderBy: { sold: "desc" },
+        take: 5,
+      }),
+      prisma.product.findMany({
+        where: { active: true, stock: { lt: 10 }, ...productScope },
+        orderBy: { stock: "asc" },
+        take: 5,
+      }),
     ]);
 
   const statusCounts = await prisma.order.groupBy({
     by: ["status"],
+    where: orderScope,
     _count: { _all: true },
   });
 
@@ -89,6 +114,14 @@ export default async function MerchantOverviewPage() {
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-black text-gray-900">{t(locale, "merchant_overview")}</h1>
+
+      <ShopSettings
+        initial={{
+          shopName: me?.shopName ?? null,
+          shopSlug: me?.shopSlug ?? null,
+          whatsapp: me?.whatsapp ?? null,
+        }}
+      />
 
       {subStatus === "TRIAL" && (
         <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-sand-200 bg-gradient-to-br from-sand-50 to-white p-5 shadow-sm">

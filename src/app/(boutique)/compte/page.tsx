@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { User, Store, Truck, PackageSearch, ArrowRight, Package, ShieldCheck } from "lucide-react";
+import { User, Store, Truck, PackageSearch, ArrowRight, Package } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth";
 import { getLocale } from "@/lib/locale-server";
@@ -69,18 +69,6 @@ export default async function AccountPage() {
           <ArrowRight className="h-5 w-5 rtl:rotate-180" />
         </Link>
       )}
-      {user.role === "ADMIN" && (
-        <Link
-          href="/admin"
-          className="mt-6 flex items-center justify-between rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-700 p-5 text-white shadow-md transition hover:opacity-95"
-        >
-          <span className="flex items-center gap-3">
-            <ShieldCheck className="h-6 w-6" />
-            <span className="font-bold">{t(locale, "nav_admin")}</span>
-          </span>
-          <ArrowRight className="h-5 w-5 rtl:rotate-180" />
-        </Link>
-      )}
 
       <h2 className="mt-10 flex items-center gap-2 text-xl font-black text-gray-900">
         <Package className="h-5 w-5 text-brand-600" /> {t(locale, "account_my_orders")}
@@ -143,6 +131,7 @@ export default async function AccountPage() {
           user={{
             name: dbUser?.name ?? "",
             phone: dbUser?.phone ?? null,
+            whatsapp: dbUser?.whatsapp ?? null,
             city: dbUser?.city ?? null,
             address: dbUser?.address ?? null,
           }}

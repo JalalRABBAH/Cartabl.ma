@@ -28,6 +28,8 @@ export function ProductBuyBox({ product }: { product: CardProduct }) {
     typeof window !== "undefined" &&
       (JSON.parse(window.localStorage.getItem(WISHLIST_KEY) || "[]") as string[]).includes(product.slug),
   );
+  const allImages = product.images?.length > 0 ? product.images : (product.imageUrl ? [product.imageUrl] : []);
+  const [imgIdx, setImgIdx] = useState(0);
 
   const discount = discountFor(product.price, product.compareAtPrice);
   const name = locale === "ar" ? product.nameAr : product.name;
@@ -69,7 +71,12 @@ export function ProductBuyBox({ product }: { product: CardProduct }) {
       <div>
         <div className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm">
           <div className="aspect-square">
-            <ProductArt category={product.category as never} colors={product.colors} variant={view} />
+            {allImages.length > 0 ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={allImages[imgIdx] ?? allImages[0]} alt={name} className="h-full w-full object-cover" />
+            ) : (
+              <ProductArt category={product.category as never} colors={product.colors} variant={view} />
+            )}
           </div>
           <button
             onClick={toggleWish}
@@ -87,22 +94,41 @@ export function ProductBuyBox({ product }: { product: CardProduct }) {
             </span>
           )}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-3">
-          {views.map((v) => (
-            <button
-              key={v.v}
-              onClick={() => setView(v.v)}
-              className={cn(
-                "cursor-pointer overflow-hidden rounded-2xl border-2 transition",
-                view === v.v ? "border-brand-600" : "border-transparent hover:border-gray-200",
-              )}
-            >
-              <div className="aspect-square">
-                <ProductArt category={product.category as never} colors={product.colors} variant={v.v} />
-              </div>
-            </button>
-          ))}
-        </div>
+        {allImages.length > 1 && (
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+            {allImages.map((url, i) => (
+              <button
+                key={i}
+                onClick={() => setImgIdx(i)}
+                className={cn(
+                  "h-16 w-16 shrink-0 cursor-pointer overflow-hidden rounded-xl border-2 transition",
+                  imgIdx === i ? "border-brand-600" : "border-transparent hover:border-gray-200",
+                )}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={url} alt="" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+        {allImages.length === 0 && (
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            {views.map((v) => (
+              <button
+                key={v.v}
+                onClick={() => setView(v.v)}
+                className={cn(
+                  "cursor-pointer overflow-hidden rounded-2xl border-2 transition",
+                  view === v.v ? "border-brand-600" : "border-transparent hover:border-gray-200",
+                )}
+              >
+                <div className="aspect-square">
+                  <ProductArt category={product.category as never} colors={product.colors} variant={v.v} />
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div>

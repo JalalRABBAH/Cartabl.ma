@@ -444,6 +444,7 @@ async function main() {
       name: "Rachid El Amrani",
       email: "rachid@demo.ma",
       phone: "0667766554",
+      whatsapp: "0667766554",
       passwordHash: hashPassword("demo1234"),
       role: Role.SELLER,
       city: "Casablanca",

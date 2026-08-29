@@ -126,8 +126,11 @@ export default async function AdminMerchantsPage() {
                       <Store className="h-4 w-4" />
                     </span>
                     <div>
-                      <p className="font-bold text-gray-900">{user.name}</p>
-                      <p className="text-xs text-gray-400" dir="ltr">{user.email}</p>
+                      <p className="font-bold text-gray-900">{user.shopName ?? user.name}</p>
+                      <p className="text-xs text-gray-400">
+                        {user.shopName ? `${user.name} · ` : ""}
+                        <span dir="ltr">{user.email}</span>
+                      </p>
                     </div>
                   </div>
                 </td>

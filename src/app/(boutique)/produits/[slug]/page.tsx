@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Star, ChevronRight } from "lucide-react";
+import { Star, ChevronRight, MessageCircle, Store } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { getLocale } from "@/lib/locale-server";
 import { getSessionUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
 import { toCard } from "@/lib/serialize";
+import { toWhatsAppNumber, waLink } from "@/lib/utils";
 import { ProductBuyBox } from "@/components/storefront/product-buy-box";
 import { ProductCard } from "@/components/storefront/product-card";
 import { ReviewForm } from "@/components/storefront/review-form";
+import { WhatsAppFloat } from "@/components/storefront/whatsapp-float";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,9 +28,21 @@ export default async function ProductPage({ params }: Props) {
 
   const product = await prisma.product.findUnique({
     where: { slug },
-    include: { reviews: { include: { user: true }, orderBy: { createdAt: "desc" }, take: 6 } },
+    include: {
+      seller: { select: { name: true, shopName: true, city: true, whatsapp: true, phone: true } },
+      reviews: { include: { user: true }, orderBy: { createdAt: "desc" }, take: 6 },
+    },
   });
   if (!product || !product.active) notFound();
+
+  const seller = product.seller;
+  const waNumber = toWhatsAppNumber(seller?.whatsapp) ?? toWhatsAppNumber(seller?.phone);
+  const productName = locale === "ar" ? product.nameAr : product.name;
+  const sellerDisplay = seller?.shopName ?? seller?.name ?? "";
+  const waMessage =
+    locale === "ar"
+      ? `مرحبا ${sellerDisplay}، أنا مهتم بمنتجكم « ${productName} » على Mbag.ma. هل هو متوفر؟`
+      : `Bonjour ${sellerDisplay}, je suis intéressé(e) par votre article « ${productName} » sur Mbag.ma. Est-il disponible ?`;
 
   const related = await prisma.product.findMany({
     where: { active: true, category: product.category, id: { not: product.id } },
@@ -49,22 +63,55 @@ export default async function ProductPage({ params }: Props) {
       <ProductBuyBox product={toCard(product)} />
 
       <section className="mt-12 grid gap-8 lg:grid-cols-[1fr_360px]">
-        <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-lg font-black text-gray-900">{t(locale, "product_description")}</h2>
-          <p className="mt-3 leading-relaxed text-gray-600">
-            {locale === "ar" ? product.descriptionAr : product.description}
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {[
-              { k: t(locale, "product_brand"), v: product.brand },
-              { k: t(locale, "product_level"), v: product.level ? t(locale, `level_${product.level}` as never) : "—" },
-            ].map((row) => (
-              <div key={row.k} className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3 text-sm">
-                <span className="text-gray-500">{row.k}</span>
-                <span className="font-semibold text-gray-900">{row.v}</span>
-              </div>
-            ))}
+        <div className="space-y-8">
+          <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
+            <h2 className="text-lg font-black text-gray-900">{t(locale, "product_description")}</h2>
+            <p className="mt-3 leading-relaxed text-gray-600">
+              {locale === "ar" ? product.descriptionAr : product.description}
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {[
+                { k: t(locale, "product_brand"), v: product.brand },
+                { k: t(locale, "product_level"), v: product.level ? t(locale, `level_${product.level}` as never) : "—" },
+              ].map((row) => (
+                <div key={row.k} className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3 text-sm">
+                  <span className="text-gray-500">{row.k}</span>
+                  <span className="font-semibold text-gray-900">{row.v}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {seller && (
+            <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-50">
+                  <Store className="h-5 w-5 text-brand-600" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                    {t(locale, "product_sold_by")}
+                  </p>
+                  <p className="truncate font-black text-gray-900">{seller.shopName ?? seller.name}</p>
+                  {seller.city && <p className="text-xs text-gray-500">{seller.city}</p>}
+                </div>
+              </div>
+              {waNumber && (
+                <div className="mt-5 rounded-2xl bg-emerald-50 p-4">
+                  <p className="text-sm leading-snug text-emerald-800">{t(locale, "product_whatsapp_hint")}</p>
+                  <a
+                    href={waLink(waNumber, waMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-600"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    {t(locale, "product_whatsapp_cta")}
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
@@ -109,13 +156,15 @@ export default async function ProductPage({ params }: Props) {
       {related.length > 0 && (
         <section className="mt-14">
           <h2 className="mb-6 text-2xl font-black text-gray-900">{t(locale, "product_related")}</h2>
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
             {related.map((p, i) => (
               <ProductCard key={p.slug} product={toCard(p)} index={i} />
             ))}
           </div>
         </section>
       )}
+
+      <WhatsAppFloat number={waNumber ?? ""} message={waMessage} />
     </div>
   );
 }

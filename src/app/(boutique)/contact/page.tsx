@@ -6,7 +6,7 @@ export default async function ContactPage() {
   const locale = await getLocale();
   const cards = [
     { icon: Phone, label: t(locale, "contact_phone"), value: "+212 6 00 00 00 00", sub: t(locale, "contact_hours") },
-    { icon: Mail, label: t(locale, "contact_email"), value: "contact@cartabl.ma", sub: t(locale, "contact_sub") },
+    { icon: Mail, label: t(locale, "contact_email"), value: "contact@mbag.ma", sub: t(locale, "contact_sub") },
     { icon: MessageCircle, label: t(locale, "contact_whatsapp"), value: "+212 6 00 00 00 00", sub: "24/7" },
     { icon: MapPin, label: t(locale, "account_city"), value: "Casablanca", sub: "Maroc" },
   ];

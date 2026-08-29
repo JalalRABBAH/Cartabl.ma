@@ -57,7 +57,7 @@ export function CheckoutForm({ user, role }: { user: CheckoutUser | null; role: 
     e.preventDefault();
     setError("");
     if (items.length === 0) return;
-    if (!form.customerName.trim() || !form.customerPhone.trim() || !form.city || !form.address.trim()) {
+    if (!form.customerName.trim() || !form.customerPhone.trim() || !form.customerEmail.trim() || !form.city || !form.address.trim()) {
       setError(T("checkout_required"));
       return;
     }
@@ -110,7 +110,7 @@ export function CheckoutForm({ user, role }: { user: CheckoutUser | null; role: 
                 <input className={inputCls} dir="ltr" value={form.customerPhone} onChange={(e) => set("customerPhone", e.target.value)} placeholder="06 XX XX XX XX" />
               </div>
               <div className="sm:col-span-2">
-                <label className={labelCls}>{T("checkout_email")}</label>
+                <label className={labelCls}>{T("checkout_email")} *</label>
                 <input className={inputCls} type="email" dir="ltr" value={form.customerEmail} onChange={(e) => set("customerEmail", e.target.value)} />
               </div>
             </div>

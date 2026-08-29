@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Package, MapPin, Menu, X, User, Truck, Store, Search, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Menu, X, User, Truck, Store, Search, ShieldCheck } from "lucide-react";
 import { getLocale } from "@/lib/locale-server";
 import { t } from "@/lib/i18n";
 import { getSessionUser } from "@/lib/auth";
@@ -11,15 +12,14 @@ import { CartButton } from "./cart-button";
 function Logo() {
   return (
     <Link href="/" className="group flex items-center gap-2.5">
-      <span className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-md shadow-brand-200 transition-transform group-hover:-rotate-6">
-        <Package className="h-6 w-6" />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="text-xl font-black tracking-tight text-gray-900">Cartabl<span className="text-brand-600">.ma</span></span>
-        <span className="mt-0.5 text-[10px] font-semibold uppercase tracking-widest text-sand-600">
-          Cartables du Maroc
-        </span>
-      </span>
+      <Image
+        src="/logo.png"
+        alt="Mbag.ma"
+        width={130}
+        height={44}
+        className="h-11 w-auto rounded-xl object-contain shadow-md shadow-brand-200 transition-transform group-hover:-rotate-6"
+        priority
+      />
     </Link>
   );
 }
@@ -31,6 +31,7 @@ export async function StoreHeader() {
   const nav = [
     { href: "/", label: t(locale, "nav_home") },
     { href: "/produits", label: t(locale, "nav_products") },
+    { href: "/blog", label: t(locale, "nav_blog") },
     { href: "/suivi", label: t(locale, "nav_track") },
     { href: "/contact", label: t(locale, "nav_contact") },
   ];
@@ -92,7 +93,7 @@ export async function StoreHeader() {
             </Link>
           )}
           <CartButton />
-          <MobileMenu locale={locale} />
+          <MobileMenu locale={locale} role={user?.role ?? null} />
         </div>
       </div>
       <div className="border-t border-gray-100 px-4 py-2 lg:hidden">
@@ -102,15 +103,20 @@ export async function StoreHeader() {
   );
 }
 
-function MobileMenu({ locale }: { locale: "fr" | "ar" }) {
+function MobileMenu({ locale, role }: { locale: "fr" | "ar"; role: string | null }) {
   const links = [
     { href: "/", label: t(locale, "nav_home") },
     { href: "/produits", label: t(locale, "nav_products") },
+    { href: "/blog", label: t(locale, "nav_blog") },
     { href: "/suivi", label: t(locale, "nav_track") },
     { href: "/contact", label: t(locale, "nav_contact") },
-    { href: "/compte", label: t(locale, "nav_account") },
-    { href: "/marchand", label: t(locale, "nav_merchant") },
-    { href: "/livreur", label: t(locale, "nav_delivery") },
+    ...(role === "ADMIN"
+      ? [{ href: "/admin", label: t(locale, "nav_admin") }]
+      : role === "SELLER"
+        ? [{ href: "/marchand", label: t(locale, "nav_merchant") }]
+        : role === "DELIVERY"
+          ? [{ href: "/livreur", label: t(locale, "nav_delivery") }]
+          : [{ href: "/compte", label: t(locale, "nav_account") }]),
   ];
   return (
     <div className="relative xl:hidden">
@@ -129,7 +135,17 @@ function MobileMenu({ locale }: { locale: "fr" | "ar" }) {
               href={l.href}
               className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-700"
             >
-              {l.href === "/marchand" ? <Store className="h-4 w-4" /> : l.href === "/livreur" ? <Truck className="h-4 w-4" /> : <Search className="h-4 w-4" />}
+              {l.href === "/marchand" ? (
+                <Store className="h-4 w-4" />
+              ) : l.href === "/livreur" ? (
+                <Truck className="h-4 w-4" />
+              ) : l.href === "/admin" ? (
+                <ShieldCheck className="h-4 w-4" />
+              ) : l.href === "/compte" ? (
+                <User className="h-4 w-4" />
+              ) : (
+                <Search className="h-4 w-4" />
+              )}
               {l.label}
             </Link>
           ))}

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Package, Phone, Mail, MapPin, Truck, ShieldCheck, CreditCard } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin, Truck, ShieldCheck, CreditCard, Newspaper } from "lucide-react";
 import { getLocale } from "@/lib/locale-server";
 import { t } from "@/lib/i18n";
 
@@ -11,12 +12,13 @@ export async function StoreFooter() {
       <div className="container-site grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
-              <Package className="h-5 w-5" />
-            </span>
-            <span className="text-lg font-black text-white">
-              Cartabl<span className="text-brand-400">.ma</span>
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Mbag.ma"
+              width={120}
+              height={40}
+              className="h-10 w-auto rounded-xl object-contain"
+            />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-gray-400">{t(locale, "footer_about")}</p>
           <p className="mt-4 text-xs text-gray-500">{t(locale, "footer_made")}</p>
@@ -43,6 +45,10 @@ export async function StoreFooter() {
             <li><Link href="/livraison" className="text-gray-400 transition hover:text-brand-400">{t(locale, "footer_delivery_link")}</Link></li>
             <li><Link href="/faq" className="text-gray-400 transition hover:text-brand-400">{t(locale, "footer_faq_link")}</Link></li>
             <li><Link href="/apropos" className="text-gray-400 transition hover:text-brand-400">{t(locale, "footer_about_link")}</Link></li>
+            <li><Link href="/blog" className="flex items-center gap-1.5 text-gray-400 transition hover:text-brand-400">
+              <Newspaper className="h-3.5 w-3.5 text-brand-400" />
+              {t(locale, "nav_blog")}
+            </Link></li>
           </ul>
         </div>
 
@@ -52,7 +58,7 @@ export async function StoreFooter() {
           </h3>
           <ul className="mt-4 space-y-3 text-sm text-gray-400">
             <li className="flex items-center gap-2.5"><Phone className="h-4 w-4 text-brand-400" /> +212 6 00 00 00 00</li>
-            <li className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-brand-400" /> contact@cartabl.ma</li>
+            <li className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-brand-400" /> contact@mbag.ma</li>
             <li className="flex items-center gap-2.5"><MapPin className="h-4 w-4 text-brand-400" /> Casablanca, Maroc</li>
           </ul>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -70,7 +76,7 @@ export async function StoreFooter() {
       </div>
       <div className="border-t border-gray-800">
         <div className="container-site flex flex-col items-center justify-between gap-2 py-5 text-xs text-gray-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} Cartabl.ma — {t(locale, "footer_rights")}</p>
+          <p>© {new Date().getFullYear()} Mbag.ma — {t(locale, "footer_rights")}</p>
           <p className="flex items-center gap-1.5">{t(locale, "brandName")}</p>
         </div>
       </div>

@@ -45,7 +45,7 @@ export function OrderTimeline({
   const actorLabel = (actor: string, name: string | null) => {
     if (actor === "SELLER") return `${t(locale, "merchant_title")}${name ? ` · ${name}` : ""}`;
     if (actor === "DELIVERY") return `${t(locale, "delivery_title")}${name ? ` · ${name}` : ""}`;
-    return name ?? "Cartabl.ma";
+    return name ?? "Mbag.ma";
   };
 
   return (

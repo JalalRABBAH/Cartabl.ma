@@ -43,3 +43,16 @@ export function discountFor(price: number, compareAt?: number | null): number {
   if (!compareAt || compareAt <= price) return 0;
   return Math.round(((compareAt - price) / compareAt) * 100);
 }
+
+export function toWhatsAppNumber(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  let n = raw.replace(/[\s\-().]/g, "");
+  if (n.startsWith("+")) n = n.slice(1);
+  else if (n.startsWith("00")) n = n.slice(2);
+  if (n.startsWith("0")) n = "212" + n.slice(1);
+  return /^\d{10,15}$/.test(n) ? n : null;
+}
+
+export function waLink(number: string, message: string): string {
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+}

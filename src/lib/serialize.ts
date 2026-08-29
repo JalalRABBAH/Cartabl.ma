@@ -15,6 +15,8 @@ export type CardProduct = {
   stock: number;
   colors: string[];
   level: string | null;
+  imageUrl: string | null;
+  images: string[];
   rating: number;
   ratingCount: number;
   sold: number;
@@ -22,6 +24,10 @@ export type CardProduct = {
 };
 
 export function toCard(p: Product): CardProduct {
+  let images: string[] = [];
+  try { images = JSON.parse(p.imagesJson || "[]"); } catch { /* ignore */ }
+  if (images.length === 0 && p.imageUrl) images = [p.imageUrl];
+
   return {
     id: p.id,
     slug: p.slug,
@@ -36,6 +42,8 @@ export function toCard(p: Product): CardProduct {
     stock: p.stock,
     colors: parseColors(p.colorsJson),
     level: p.level,
+    imageUrl: p.imageUrl,
+    images,
     rating: p.rating,
     ratingCount: p.ratingCount,
     sold: p.sold,

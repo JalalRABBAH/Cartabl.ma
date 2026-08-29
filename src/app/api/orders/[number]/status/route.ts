@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth";
 import { allowedTransitions, ACTOR } from "@/lib/orders";
+import { sendOrderStatusMail } from "@/lib/mailer";
 import { OrderStatus } from "@prisma/client";
 
 const schema = z.object({
@@ -27,7 +28,7 @@ export async function POST(
 
   const order = await prisma.order.findUnique({
     where: { number },
-    include: { items: true },
+    include: { items: true, user: true },
   });
   if (!order) return NextResponse.json({ error: "notfound" }, { status: 404 });
 
@@ -78,6 +79,23 @@ export async function POST(
       },
     });
   });
+
+  const buyerEmail = order.customerEmail || order.user?.email;
+  if (buyerEmail) {
+    sendOrderStatusMail(
+      buyerEmail,
+      {
+        number: updated.number,
+        trackingCode: updated.trackingCode,
+        customerName: updated.customerName,
+        subtotal: updated.subtotal,
+        shippingFee: updated.shippingFee,
+        total: updated.total,
+      },
+      body.status,
+      body.note
+    );
+  }
 
   return NextResponse.json({ ok: true, status: updated.status });
 }

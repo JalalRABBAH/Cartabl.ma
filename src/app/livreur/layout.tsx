@@ -24,7 +24,7 @@ export default async function DeliveryLayout({
             <span className="text-lg font-black text-gray-900">
               {t(locale, "nav_delivery")}
               <span className="block text-[10px] font-semibold uppercase tracking-widest text-gray-400">
-                Cartabl.ma
+                Mbag.ma
               </span>
             </span>
           </Link>

@@ -5,6 +5,7 @@ import { getSessionUser } from "@/lib/auth";
 import { generateTrackingCode, generateOrderNumber } from "@/lib/utils";
 import { shippingFeeFor, FREE_SHIPPING_THRESHOLD } from "@/lib/shipping";
 import { OrderStatus } from "@prisma/client";
+import { sendOrderConfirmationMail } from "@/lib/mailer";
 
 const itemSchema = z.object({
   productId: z.string(),
@@ -15,7 +16,7 @@ const itemSchema = z.object({
 const schema = z.object({
   customerName: z.string().min(2),
   customerPhone: z.string().min(8),
-  customerEmail: z.string().email().optional().or(z.literal("")),
+  customerEmail: z.string().email(),
   city: z.string().min(2),
   address: z.string().min(5),
   notes: z.string().optional(),
@@ -97,7 +98,7 @@ export async function POST(req: NextRequest) {
           create: {
             status: OrderStatus.PENDING,
             actor: "SYSTEM",
-            actorName: "Cartabl.ma",
+            actorName: "Mbag.ma",
             note: "Commande reçue via le site",
           },
         },
@@ -113,6 +114,27 @@ export async function POST(req: NextRequest) {
 
     return created;
   });
+
+  const buyerEmail = order.customerEmail || user?.email;
+  if (buyerEmail) {
+    sendOrderConfirmationMail(
+      buyerEmail,
+      {
+        number: order.number,
+        trackingCode: order.trackingCode,
+        customerName: order.customerName,
+        subtotal: order.subtotal,
+        shippingFee: order.shippingFee,
+        total: order.total,
+      },
+      orderItems.map(({ productName, quantity, unitPrice, total: t }) => ({
+        productName,
+        quantity,
+        unitPrice,
+        total: t,
+      }))
+    );
+  }
 
   return NextResponse.json(
     {

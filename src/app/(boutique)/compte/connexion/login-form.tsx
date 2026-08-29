@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { LogIn, Loader2, User, Lock, Sparkles } from "lucide-react";
+import { LogIn, Loader2, User, Lock } from "lucide-react";
 import { useLocale } from "@/app/providers";
 import { Button } from "@/components/ui/button";
 
@@ -15,13 +15,6 @@ export function LoginForm() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const demo = [
-    { label: `${T("auth_demo_buyer")}`, email: "aya@demo.ma", password: "demo1234", icon: "🛍️" },
-    { label: `${T("auth_demo_seller")}`, email: "rachid@demo.ma", password: "demo1234", icon: "🏪" },
-    { label: `${T("auth_demo_delivery")}`, email: "youssef@demo.ma", password: "demo1234", icon: "🚚" },
-    { label: `${T("auth_demo_admin")}`, email: "admin@demo.ma", password: "admin1234", icon: "🛡️" },
-  ];
 
   const submit = async (email = form.email, password = form.password) => {
     setError("");
@@ -69,7 +62,7 @@ export function LoginForm() {
               <label className="mb-1.5 block text-sm font-semibold text-gray-700">{T("auth_email")}</label>
               <div className="relative">
                 <User className="pointer-events-none absolute start-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                <input className={inputCls} type="email" dir="ltr" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="aya@demo.ma" />
+                <input className={inputCls} type="email" dir="ltr" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="email@example.com" />
               </div>
             </div>
             <div>
@@ -78,6 +71,12 @@ export function LoginForm() {
                 <Lock className="pointer-events-none absolute start-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <input className={inputCls} type="password" dir="ltr" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="••••••••" />
               </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <span />
+              <Link href="/compte/mot-de-passe-oublie" className="text-sm font-semibold text-brand-600 hover:underline">
+                {T("auth_forgot_link")}
+              </Link>
             </div>
             {error && <p className="text-sm font-medium text-red-600">{error}</p>}
             <Button type="submit" size="lg" className="w-full" disabled={loading}>
@@ -92,26 +91,6 @@ export function LoginForm() {
               {T("auth_register_link")}
             </Link>
           </p>
-        </div>
-
-        <div className="mt-6 rounded-[2rem] border border-dashed border-sand-300 bg-sand-50 p-5">
-          <p className="flex items-center gap-2 text-sm font-bold text-sand-800">
-            <Sparkles className="h-4 w-4" /> {T("auth_demo_title")}
-          </p>
-          <div className="mt-3 grid gap-2">
-            {demo.map((d) => (
-              <button
-                key={d.email}
-                onClick={() => submit(d.email, d.password)}
-                className="flex cursor-pointer items-center justify-between rounded-xl bg-white px-4 py-3 text-left shadow-sm transition hover:shadow"
-              >
-                <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                  <span>{d.icon}</span> {d.label}
-                </span>
-                <span className="font-mono text-xs text-gray-400">{d.email}</span>
-              </button>
-            ))}
-          </div>
         </div>
       </div>
     </div>

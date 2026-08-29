@@ -30,6 +30,8 @@ export function ProductCard({ product, index = 0 }: { product: CardProduct; inde
     setWished(!wished);
   };
 
+  const images = product.images?.length > 0 ? product.images : (product.imageUrl ? [product.imageUrl] : []);
+  const [imgIdx, setImgIdx] = useState(0);
   const discount = discountFor(product.price, product.compareAtPrice);
   const name = locale === "ar" ? product.nameAr : product.name;
 
@@ -58,13 +60,33 @@ export function ProductCard({ product, index = 0 }: { product: CardProduct; inde
       style={{ animationDelay: `${Math.min(index * 60, 400)}ms` }}
     >
       <div className="relative">
-        <div className="aspect-square w-full overflow-hidden">
-          <ProductArt
-            category={product.category as never}
-            colors={product.colors}
-            className="transition-transform duration-500 group-hover:scale-105"
-          />
+        <div className="aspect-square w-full overflow-hidden bg-white">
+          {images.length > 0 ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={images[imgIdx] ?? images[0]}
+              alt={name}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <ProductArt
+              category={product.category as never}
+              colors={product.colors}
+              className="transition-transform duration-500 group-hover:scale-105"
+            />
+          )}
         </div>
+        {images.length > 1 && (
+          <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`h-1.5 w-1.5 rounded-full transition-all ${i === imgIdx ? "bg-white w-3" : "bg-white/50"}`}
+              />
+            ))}
+          </div>
+        )}
         <div className="absolute start-3 top-3 flex flex-col gap-1.5">
           {discount > 0 && (
             <span className="rounded-full bg-red-500 px-2.5 py-1 text-[11px] font-bold text-white shadow">

@@ -37,7 +37,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl(pathname));
   }
   const isPublicAccount =
-    pathname === "/compte/connexion" || pathname === "/compte/inscription";
+    pathname === "/compte/connexion" ||
+    pathname === "/compte/inscription" ||
+    pathname === "/compte/mot-de-passe-oublie" ||
+    pathname.startsWith("/compte/reinitialiser-mot-de-passe");
   if (pathname.startsWith("/compte") && !isPublicAccount && !role) {
     return NextResponse.redirect(loginUrl(pathname));
   }

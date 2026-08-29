@@ -6,6 +6,7 @@ import { createSession, SESSION_COOKIE } from "@/lib/auth";
 import { Role } from "@prisma/client";
 import { cookies } from "next/headers";
 import { addDays, SELLER_TRIAL_DAYS, SELLER_PLAN_PRICE } from "@/lib/subscription";
+import { sendWelcomeMail } from "@/lib/mailer";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -48,6 +49,7 @@ export async function POST(req: NextRequest) {
       });
     }
     const token = await createSession({ id: user.id, email: user.email, name: user.name, role: user.role });
+    sendWelcomeMail({ name: user.name, email: user.email, role: user.role });
     const store = await cookies();
     store.set(SESSION_COOKIE, token, { httpOnly: true, sameSite: "lax", maxAge: 60 * 60 * 24 * 7, path: "/" });
     return NextResponse.json({ ok: true, role: user.role, name: user.name }, { status: 201 });

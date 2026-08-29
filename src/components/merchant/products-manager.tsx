@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Pencil, Trash2, X, Loader2, Package } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Loader2, Package, ImagePlus } from "lucide-react";
 import { useLocale } from "@/app/providers";
 import { ProductArt } from "@/components/product-art";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,8 @@ type ProductClient = {
   slug: string;
   name: string;
   nameAr: string;
+  description: string;
+  descriptionAr: string;
   brand: string;
   category: string;
   price: number;
@@ -22,6 +24,8 @@ type ProductClient = {
   stock: number;
   colors: string[];
   level: string | null;
+  imageUrl: string | null;
+  images: string[];
   featured: boolean;
 };
 
@@ -55,6 +59,8 @@ function ProductForm({
           ...EMPTY,
           name: initial.name,
           nameAr: initial.nameAr,
+          description: initial.description,
+          descriptionAr: initial.descriptionAr,
           brand: initial.brand,
           category: initial.category as ProductCategory,
           price: String(initial.price),
@@ -66,51 +72,60 @@ function ProductForm({
         }
       : EMPTY,
   );
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>(initial?.images?.length ? initial.images : (initial?.imageUrl ? [initial.imageUrl] : []));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
   const set = (k: string, v: string | boolean) => setForm((f) => ({ ...f, [k]: v }));
 
+  const pickImages = (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const newFiles = Array.from(files).filter(f => f.size > 0);
+    if (newFiles.length === 0) return;
+    const newUrls = newFiles.map(f => URL.createObjectURL(f));
+    setImageFiles(prev => [...prev, ...newFiles]);
+    setPreviewUrls(prev => [...prev, ...newUrls]);
+  };
+
+  const removeImage = (idx: number) => {
+    if (previewUrls[idx]?.startsWith("blob:")) URL.revokeObjectURL(previewUrls[idx]);
+    setImageFiles(prev => prev.filter((_, i) => i !== idx));
+    setPreviewUrls(prev => prev.filter((_, i) => i !== idx));
+  };
+
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    const colors = form.colorsText
-      .split(",")
-      .map((c) => c.trim().replace(/\s/g, ""))
-      .filter((c) => /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(c));
-    if (colors.length === 0) {
-      setError(T("checkout_error"));
-      return;
-    }
     setBusy(true);
-    const payload = {
-      name: form.name,
-      nameAr: form.nameAr,
-      description: form.description,
-      descriptionAr: form.descriptionAr,
-      brand: form.brand,
-      category: form.category,
-      price: Number(form.price),
-      compareAtPrice: form.compareAtPrice ? Number(form.compareAtPrice) : null,
-      stock: Number(form.stock) || 0,
-      colors,
-      level: form.level || null,
-      featured: form.featured,
-    };
     try {
+      const fd = new FormData();
+      fd.set("name", form.name);
+      fd.set("nameAr", form.nameAr);
+      fd.set("description", form.description);
+      fd.set("descriptionAr", form.descriptionAr);
+      fd.set("brand", form.brand);
+      fd.set("category", form.category);
+      fd.set("price", form.price);
+      fd.set("compareAtPrice", form.compareAtPrice);
+      fd.set("stock", String(Number(form.stock) || 0));
+      fd.set("colors", form.colorsText);
+      fd.set("level", form.level);
+      fd.set("featured", String(form.featured));
+      imageFiles.forEach(f => fd.append("images", f));
+
       const res = initial
-        ? await fetch(`/api/products/${initial.id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          })
-        : await fetch("/api/products", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
+        ? await fetch(`/api/products/${initial.id}`, { method: "PATCH", body: fd })
+        : await fetch("/api/products", { method: "POST", body: fd });
       if (!res.ok) {
-        setError(T("checkout_error"));
+        let msg = T("checkout_error");
+        try {
+          const j = await res.json();
+          if (j?.message) msg = j.message;
+        } catch {
+          // réponse non JSON
+        }
+        setError(msg);
         return;
       }
       router.refresh();
@@ -134,15 +149,15 @@ function ProductForm({
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
           <label className={labelCls}>{T("merchant_name_fr")} *</label>
-          <input className={inputCls} value={form.name} onChange={(e) => set("name", e.target.value)} />
+          <input required className={inputCls} value={form.name} onChange={(e) => set("name", e.target.value)} />
         </div>
         <div>
-          <label className={labelCls}>{T("merchant_name_ar")} *</label>
+          <label className={labelCls}>{T("merchant_name_ar")}</label>
           <input className={inputCls} dir="rtl" value={form.nameAr} onChange={(e) => set("nameAr", e.target.value)} />
         </div>
         <div>
           <label className={labelCls}>{T("merchant_brand")} *</label>
-          <input className={inputCls} value={form.brand} onChange={(e) => set("brand", e.target.value)} />
+          <input required className={inputCls} value={form.brand} onChange={(e) => set("brand", e.target.value)} />
         </div>
         <div>
           <label className={labelCls}>{T("merchant_category")}</label>
@@ -154,23 +169,23 @@ function ProductForm({
         </div>
         <div className="sm:col-span-2">
           <label className={labelCls}>{T("merchant_desc_fr")} *</label>
-          <textarea className={cn(inputCls, "h-20 resize-none py-2")} value={form.description} onChange={(e) => set("description", e.target.value)} />
+          <textarea required className={cn(inputCls, "h-20 resize-none py-2")} value={form.description} onChange={(e) => set("description", e.target.value)} />
         </div>
         <div className="sm:col-span-2">
-          <label className={labelCls}>{T("merchant_desc_ar")} *</label>
+          <label className={labelCls}>{T("merchant_desc_ar")}</label>
           <textarea className={cn(inputCls, "h-20 resize-none py-2")} dir="rtl" value={form.descriptionAr} onChange={(e) => set("descriptionAr", e.target.value)} />
         </div>
         <div>
           <label className={labelCls}>{T("merchant_price")} *</label>
-          <input className={inputCls} type="number" dir="ltr" value={form.price} onChange={(e) => set("price", e.target.value)} placeholder="299" />
+          <input required className={inputCls} type="number" min="1" dir="ltr" value={form.price} onChange={(e) => set("price", e.target.value)} placeholder="299" />
         </div>
         <div>
           <label className={labelCls}>{T("merchant_compare_price")}</label>
-          <input className={inputCls} type="number" dir="ltr" value={form.compareAtPrice} onChange={(e) => set("compareAtPrice", e.target.value)} />
+          <input className={inputCls} type="number" min="1" dir="ltr" value={form.compareAtPrice} onChange={(e) => set("compareAtPrice", e.target.value)} />
         </div>
         <div>
           <label className={labelCls}>{T("merchant_stock")}</label>
-          <input className={inputCls} type="number" dir="ltr" value={form.stock} onChange={(e) => set("stock", e.target.value)} />
+          <input className={inputCls} type="number" min="0" dir="ltr" value={form.stock} onChange={(e) => set("stock", e.target.value)} />
         </div>
         <div>
           <label className={labelCls}>{T("merchant_level")}</label>
@@ -181,6 +196,36 @@ function ProductForm({
             <option value="lycee">{T("level_lycee")}</option>
             <option value="universite">{T("level_universite")}</option>
           </select>
+        </div>
+        <div className="sm:col-span-2">
+          <label className={labelCls}>
+            <ImagePlus className="me-1 inline h-3.5 w-3.5 text-brand-500" />
+            {T("merchant_image")} ({previewUrls.length}/10)
+          </label>
+          {previewUrls.length > 0 && (
+            <div className="mb-3 flex flex-wrap gap-2">
+              {previewUrls.map((url, i) => (
+                <div key={i} className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+                  <img src={url} alt="" className="h-full w-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(i)}
+                    className="absolute -right-1 -top-1 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-red-500 text-white opacity-0 shadow transition group-hover:opacity-100"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            multiple
+            onChange={(e) => pickImages(e.target.files)}
+            className="block w-full cursor-pointer text-sm text-gray-500 file:me-3 file:cursor-pointer file:rounded-xl file:border-0 file:bg-brand-600 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-brand-700"
+          />
+          <p className="mt-1 text-[11px] text-gray-400">{T("merchant_image_hint")}</p>
         </div>
         <div className="sm:col-span-2">
           <label className={labelCls}>{T("merchant_colors")}</label>
@@ -252,8 +297,13 @@ export function ProductsManager({ products }: { products: ProductClient[] }) {
           {products.map((p) => (
             <div key={p.id} className="rounded-3xl border border-gray-100 bg-white p-4 shadow-sm">
               <div className="flex gap-3">
-                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl">
-                  <ProductArt category={p.category as ProductCategory} colors={p.colors} />
+                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-white">
+                  {(p.images?.length > 0 ? p.images[0] : p.imageUrl) ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.images?.length > 0 ? p.images[0] : p.imageUrl!} alt="" className="h-full w-full object-cover" />
+                  ) : (
+                    <ProductArt category={p.category as ProductCategory} colors={p.colors} />
+                  )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-bold text-gray-900">
