@@ -710,6 +710,818 @@ export const BLOG_POSTS: BlogPost[] = [
       ],
     },
   },
+  {
+    slug: "cartable-cp-premiere-annee",
+    rubrique: "cartables",
+    date: "2026-08-28",
+    readTime: 4,
+    faq: {
+      fr: [
+        { q: "Quel cartable pour le CP ?", a: "Un modèle de 15 à 20 litres, léger à vide, à dos renforcé et avec une poche poitrine : la taille à partir de laquelle le cartable devient scolaire." },
+        { q: "Faut-il réutiliser le cartable de maternelle en CP ?", a: "Si le volume est suffisant et le dos en bon état, oui. Sinon, priorité à un modèle adapté aux cahiers du CP." },
+      ],
+      ar: [
+        { q: "أي حقيبة للسنة الأولى؟", a: "نموذج من 15 إلى 20 لتراً، خفيفاً فارغاً، بظهر مقوّى وجيب أمامي: الحجم الذي تصبح فيه الحقيبة مدرسية." },
+        { q: "هل نعيد استعمال حقيبة الروض في السنة الأولى؟", a: "إن كانت السعة كافية والظهر بحالة جيدة، نعم. وإلا فالأولوية لنموذج يناسب دفاتر السنة الأولى." },
+      ],
+    },
+    fr: {
+      title: "Cartable de CP : le grand saut de la maternelle au cours préparatoire",
+      excerpt:
+        "Premiers cahiers, premières leçons, premier vrai cartable : les critères pour accompagner l'entrée au CP sans surcharger le dos.",
+      body: [
+        { type: "p", text: "Le CP marque le passage à la vie scolaire : l'enfant rapporte des cahiers, un livret, parfois un livre. C'est le moment de passer du petit cartable de maternelle à un vrai modèle, sans pour autant le surcharger." },
+        { type: "h2", text: "Le bon volume au CP" },
+        { type: "ul", items: ["15 à 20 litres, le format officiel du cours préparatoire", "Moins d'1 kg à vide", "Poche poitrine pour répartir le poids", "Ouverture large pour le cartable qui se pose par terre"] },
+        { type: "h2", text: "Ce qu'il transporte réellement" },
+        { type: "p", text: "Au CP, la consigne d'école est souvent claire : un cahier de liaison, des cahiers du jour, quelques fichiers. Le sac reste léger si on choisit un modèle sans ardoise, sans table d'appoint ni farde à roulettes inutile." },
+        { type: "h2", text: "Les détails qui font la différence" },
+        { type: "ul", items: ["Dos et bretelles rembourrés dès ce niveau", "Fermeture facile pour un enfant de 6 ans", "Fond rigide et angles protégés", "Sangle de poitrine pour éviter les bretelles qui glissent"] },
+        { type: "quote", text: "En CP, le cartable se choisit comme une paire de chaussures : sur la bonne taille, jamais avec une année d'avance." },
+        { type: "p", text: "Tous les niveaux du primaire suivent la même logique décrite dans notre guide pour choisir un cartable selon la classe. Les modèles adaptés sont dans la catégorie Cartables classiques." },
+      ],
+    },
+    ar: {
+      title: "حقيبة السنة الأولى: القفزة الكبرى من الروض إلى القسم الأول",
+      excerpt:
+        "دفاتر أولى، دروس أولى، حقيبة حقيقية أولى: معايير مرافقة الدخول إلى السنة الأولى دون إثقال الظهر.",
+      body: [
+        { type: "p", text: "تعلن السنة الأولى الانتقال إلى الحياة المدرسية: يعيد الطفل دفاتر وسجل تتبع وأحياناً كتاباً. هذا هو الوقت المناسب للانتقال من حقيبة الروض الصغيرة إلى نموذج حقيقي، دون إثقالها." },
+        { type: "h2", text: "الحجم المناسب في السنة الأولى" },
+        { type: "ul", items: ["15 إلى 20 لتراً، القياس الرسمي للسنة الأولى", "أقل من 1 كغ فارغة", "جيب أمامي لتوزيع الوزن", "فتحة واسعة لأن الحقيبة توضع أرضاً"] },
+        { type: "h2", text: "ما الذي يحمله فعلاً" },
+        { type: "p", text: "في السنة الأولى تكون تعليمات المدرسة واضحة: دفتر تواصل، دفاتر يومية، وبعض الملفات. تبقى الحقيبة خفيفة إذا اخترنا نموذجاً دون سبورة أو مائدة مساعدة أو حقيبة عجلات لا داعي لها." },
+        { type: "h2", text: "تفاصيل تصنع الفرق" },
+        { type: "ul", items: ["ظهر وأشرطة مبطنة منذ هذا المستوى", "سحاب سهل لطفل في 6 سنوات", "أسفل صلب وزوايا محمية", "حزام صدر يمنع انزلاق الأشرطة"] },
+        { type: "quote", text: "في السنة الأولى، تُختار الحقيبة كحذاء: بالقياس الصحيح، دون سنة تقدماً." },
+        { type: "p", text: "تتبع مستويات الابتدائي كلها نفس المنطق في دليلنا لاختيار الحقيبة حسب القسم. النماذج المناسبة موجودة في فئة الحقائب الكلاسيكية." },
+      ],
+    },
+  },
+  {
+    slug: "sac-a-dos-ou-cartable-primaire",
+    rubrique: "cartables",
+    date: "2026-08-28",
+    readTime: 4,
+    faq: {
+      fr: [
+        { q: "Sac à dos ou cartable en primaire ?", a: "Le sac à dos devient préférable dès qu'on transporte plus de cahiers, vers 8-9 ans. Le cartable classique reste une alternative à poignée pour les plus jeunes." },
+        { q: "Le cartable à roulettes remplace-t-il le sac à dos ?", a: "Non, il complète : idéal pour les trajets lourds, il doit rester stable dans les escaliers et sous le bureau." },
+      ],
+      ar: [
+        { q: "حقيبة ظهر أم حقيبة مدرسية في الابتدائي؟", a: "حقيبة الظهر هي المفضلة منذ أن ننقل دفاتر أكثر، نحو 8-9 سنوات. أما الحقيبة الكلاسيكية بمقبض فتبقى خياراً للصغار." },
+        { q: "هل تعوّض الحقيبة بعجلات حقيبة الظهر؟", a: "لا، بل تكملها: مثالية للطريق الثقيل، شرط أن تبقى ثابتة في الدرج وتحت المكتب." },
+      ],
+    },
+    fr: {
+      title: "Sac à dos ou cartable en primaire : que choisir ?",
+      excerpt:
+        "Cartable à poignée, sac à dos ou modèle à roulettes : le bon format selon l'âge de l'enfant et le nombre de cahiers transportés.",
+      body: [
+        { type: "p", text: "La question revient à chaque rentrée du primaire : cartable classique, sac à dos ou roulettes ? Il n'y a pas de bonne réponse universelle, mais une règle simple fondée sur l'âge et le volume transporté." },
+        { type: "h2", text: "Le cartable à poignée : pour les plus jeunes" },
+        { type: "p", text: "Jusqu'à 7-8 ans, l'enfant porte peu d'affaires et a besoin d'un format qu'il identifie facilement. Le cartable classique avec poignée et ouverture cloche convient, à condition de rester très léger." },
+        { type: "h2", text: "Le sac à dos : le standard du primaire" },
+        { type: "ul", items: ["Charge répartie sur les deux épaules", "Dès que les cahiers s'accumulent vers 8-9 ans", "Dos et bretelles rembourrés indispensables", "Modèles 20-25 litres pour rester maniable"] },
+        { type: "h2", text: "Les roulettes pour cas particuliers" },
+        { type: "p", text: "Le cartable à roulettes est utile quand l'école est loin du domicile et le chemin adapté. Pensez aux escaliers et au rangement sous le bureau, détaillés dans notre guide des cartables à roulettes." },
+        { type: "quote", text: "Le meilleur format est celui que l'enfant porte seul, sans aide et sans douleur, du portail à la classe." },
+        { type: "p", text: "Pour choisir la bonne capacité et la bonne taille selon l'âge, consultez notre tableau par âge et les modèles des catégories Cartables classiques, Sacs à dos et Cartables à roulettes." },
+      ],
+    },
+    ar: {
+      title: "حقيبة ظهر أم حقيبة مدرسية في الابتدائي: ماذا نختار؟",
+      excerpt:
+        "حقيبة بمقبض، حقيبة ظهر أم حقيبة بعجلات: المنسق المناسب حسب سن الطفل وعدد الدفاتر.",
+      body: [
+        { type: "p", text: "يعود السؤال في كل دخول مدرسي بالابتدائي: حقيبة كلاسيكية، حقيبة ظهر أم عجلات؟ لا جواب صحيح واحد، لكن قاعدة بسيطة حسب السن والحجم المنقول." },
+        { type: "h2", text: "الحقيبة بمقبض: للصغار" },
+        { type: "p", text: "حتى 7-8 سنوات، يحمل الطفل قليلاً ويحتاج إلى شكل يميزه بسهولة. الحقيبة الكلاسيكية بمقبض وفتحة كاملة تناسب إذا بقيت خفيفة جداً." },
+        { type: "h2", text: "حقيبة الظهر: المعيار في الابتدائي" },
+        { type: "ul", items: ["توزيع الحمل على الكتفين", "منذ أن تتكدس الدفاتر نحو 8-9 سنوات", "ظهر وأشرطة مبطنة ضروريان", "نماذج 20-25 لتراً لتبقى سهلة الحمل"] },
+        { type: "h2", text: "العجلات لحالات خاصة" },
+        { type: "p", text: "الحقيبة بعجلات مفيدة حين تكون المدرسة بعيدة من البيت والطريق مناسباً. فكروا في السلالم والترتيب تحت المكتب كما في دليلنا عن الحقائب بعجلات." },
+        { type: "quote", text: "أفضل شكل هو ما يحمله الطفل وحده، دون مساعدة ودون ألم، من البوابة إلى القسم." },
+        { type: "p", text: "لاختيار السعة والحجم المناسبين حسب السن، راجعوا جدولنا حسب العمر ونماذج فئات الحقائب الكلاسيكية، حقائب الظهر والحقائب بعجلات." },
+      ],
+    },
+  },
+  {
+    slug: "cartable-deperlant-pluie",
+    rubrique: "cartables",
+    date: "2026-08-29",
+    readTime: 3,
+    fr: {
+      title: "Cartable imperméable et déperlant : protéger les cahiers les jours de pluie",
+      excerpt:
+        "Entre décembre et février, la pluie teste les cartables. Déperlance, housse, double fond : comment éviter les cahiers trempés.",
+      body: [
+        { type: "p", text: "Un cartable qui laisse passer l'eau, c'est une trousse mouillée, des livres abîmés et un enfant mécontent. Au Maroc, la pluie des mois d'hiver met vraiment les sacs à l'épreuve." },
+        { type: "h2", text: "Déperlant ou imperméable ?" },
+        { type: "ul", items: ["Déperlant : l'eau glisse sur le tissu, suffisant pour une averse", "Imperméable : résiste à une forte pluie prolongée", "Coutures thermosoudées pour une vraie étanchéité", "Fond renforcé qui ne s'imbibe pas quand on pose le sac"] },
+        { type: "h2", text: "Les gestes simples pour tout protéger" },
+        { type: "p", text: "Rangez les documents importants côté dos, utilisez une housse de pluie quand elle est prévue et séchez le cartable à l'air libre le soir. Le feutre textile déperlant en spray ravive aussi une vieille toile." },
+        { type: "h2", text: "Que vérifier avant l'achat" },
+        { type: "ul", items: ["Tissus techniques : Oxford 600 D, polyester enduit, coton déperlant", "Zips avec protection contre l'eau", "Fond doublé ou surélevé", "Poches latérales solides pour la bouteille"] },
+        { type: "quote", text: "Le bon réflexe pluie : moins d'affaires dans le sac, et les plus précieuses toujours au centre, protégées par les côtés rembourrés." },
+        { type: "p", text: "Les matières techniques sont aussi au cœur de nos tendances sacs 2026. Retrouvez les modèles déperlants dans les catégories Cartables classiques et Sacs à dos." },
+      ],
+    },
+    ar: {
+      title: "حقيبة مقاومة للماء: حماية الدفاتر في أيام المطر",
+      excerpt:
+        "بين دجنبر وفبراير، يمتحن المطر الحقائب. مقاومة الماء، غطاء، أسفل مزدوج: كيف تتفادون دفاتر مبتلة.",
+      body: [
+        { type: "p", text: "حقيبة تتسرب إليها المياه تعني مقلمة مبللة وكتباً تالفة وطفلاً غير راضٍ. في المغرب، يضع مطر الشتاء الحقائب فعلاً على المحك." },
+        { type: "h2", text: "طارئ أم مقاوم للماء؟" },
+        { type: "ul", items: ["طارئ: ينزلق الماء على القماش، يكفي لزخة مطر", "مقاوم: يصمد أمام مطر قوي طويل", "خياطة حرارية لإحكام حقيقي", "أسفل مقوّى لا يتشبع عند وضع الحقيبة"] },
+        { type: "h2", text: "حركات بسيطة تحمي كل شيء" },
+        { type: "p", text: "ضعوا الوثائق المهمة جهة الظهر، استعملوا غطاء المطر إن وُجد، وجففوا الحقيبة في الهواء مساءً. كما أن بخاخ القماش الطارد يجدّد قماشاً قديماً." },
+        { type: "h2", text: "ما يجب التحقق منه قبل الشراء" },
+        { type: "ul", items: ["خامات تقنية: أكسفورد 600 دنير، بوليستر مطلي، قطن طارد", "سحابات محمية من الماء", "أسفل مبطن أو مرتفع", "جيوب جانبية صلبة للقارورة"] },
+        { type: "quote", text: "الاستعداد الصحيح للمطر: أغراض أقل في الحقيبة، والأثمن دائماً في المنتصف محمياً بالجوانب المبطنة." },
+        { type: "p", text: "الخامات التقنية حاضرة أيضاً في صيحات الحقائب 2026. اطلعوا على نماذج مقاومة الماء في فئتي الحقائب الكلاسيكية وحقائب الظهر." },
+      ],
+    },
+  },
+  {
+    slug: "choisir-taille-cartable-enfant",
+    rubrique: "cartables",
+    date: "2026-08-29",
+    readTime: 4,
+    fr: {
+      title: "Quelle taille de cartable pour mon enfant ? Le tableau par âge",
+      excerpt:
+        "Hauteur, largeur, capacité : un tableau simple pour adapter le cartable à la silhouette de l'enfant, du primaire au lycée.",
+      body: [
+        { type: "p", text: "Un cartable trop grand face à un petit dos provoque des bascules et des douleurs ; un sac trop petit force à transporter des affaires à la main. Voici les repères pour chaque tranche d'âge." },
+        { type: "h2", text: "Le tableau taille / capacité" },
+        { type: "ul", items: ["5-7 ans (maternelle-CP) : 10-15 L, hauteur sac 35-40 cm", "8-10 ans (CE1-CM1) : 15-20 L, hauteur 40-45 cm", "11-12 ans (CM2-6e) : 20-25 L, hauteur 45-50 cm", "13 ans et plus : 25-32 L, hauteur 45-55 cm"] },
+        { type: "h2", text: "La règle d'or : le cartable ne dépasse pas le torse" },
+        { type: "p", text: "Posé sur le dos, le sac doit tenir entre les épaules et le haut des hanches. S'il dépasse la poitrine ou descend sous les fesses, changez de taille même si la capacité semble convenable." },
+        { type: "h2", text: "Les réglages qui sauvent le dos" },
+        { type: "ul", items: ["Bretelles réglables jusqu'au bon niveau", "Sangle de poitrine à la hauteur des aisselles", "Charge placée dans le bas du sac, jamais sur le dessus", "Poids total < 10 % du poids de l'enfant"] },
+        { type: "quote", text: "La bonne taille se vérifie en un regard : le cartable suit le dos, ne le dépasse ni sur les côtés ni en hauteur." },
+        { type: "p", text: "Pour affiner par niveau scolaire, relisez notre guide du cartable selon la classe ainsi que notre article sur le sac à dos d'enfant qui grandit." },
+      ],
+    },
+    ar: {
+      title: "ما حجم حقيبة طفلي المناسب؟ جدول حسب العمر",
+      excerpt:
+        "الطول والعرض والسعة: جدول بسيط لتكييف الحقيبة مع قامة الطفل، من الابتدائي إلى الثانوي.",
+      body: [
+        { type: "p", text: "حقيبة كبيرة جداً أمام ظهر صغير تسبب الميل والألم؛ وحقيبة صغيرة جداً تجبر على حمل الأغراض باليد. هذه هي المعايير لكل فئة عمرية." },
+        { type: "h2", text: "جدول الطول / السعة" },
+        { type: "ul", items: ["5-7 سنوات (روض-سنة أولى): 10-15 لتراً، ارتفاع 35-40 سم", "8-10 سنوات: 15-20 لتراً، ارتفاع 40-45 سم", "11-12 سنة: 20-25 لتراً، ارتفاع 45-50 سم", "13 سنة فأكثر: 25-32 لتراً، ارتفاع 45-55 سم"] },
+        { type: "h2", text: "القاعدة الذهبية: لا تتجاوز الحقيبة الجذع" },
+        { type: "p", text: "موضوعة على الظهر، يجب أن تبقى بين الكتفين وأعلى الوركين. إن تجاوزت الصدر أو نزلت تحت الأرداف، فغيروا الحجم حتى لو بدت السعة مناسبة." },
+        { type: "h2", text: "التعديلات التي تحمي الظهر" },
+        { type: "ul", items: ["أشرطة قابلة للتعديل إلى المستوى الصحيح", "حزام صدر عند مستوى الإبطين", "الحمل في أسفل الحقيبة لا في أعلاها", "الوزن الكلي أقل من 10% من وزن الطفل"] },
+        { type: "quote", text: "الحجم الصحيح يُعرف بنظرة واحدة: الحقيبة تتبع الظهر ولا تتجاوزه لا جانباً ولا ارتفاعاً." },
+        { type: "p", text: "للتحديد حسب المستوى الدراسي، أعدوا قراءة دليل الحقيبة حسب القسم ومقالنا عن حقيبة الطفل الذي يكبر." },
+      ],
+    },
+  },
+  {
+    slug: "sac-dos-ecole-enfant",
+    rubrique: "sacs-a-dos",
+    date: "2026-08-29",
+    readTime: 4,
+    fr: {
+      title: "Le sac à dos d'enfant : s'adapter à une taille qui grandit",
+      excerpt:
+        "Bretelles, dos, sangle de poitrine : les réglages à revoir plusieurs fois par an pour que le sac suive l'enfant dans sa croissance.",
+      body: [
+        { type: "p", text: "Un sac à dos n'est pas un objet figé : entre le primaire et l'entrée au collège, un enfant grandit de plusieurs centimètres par an. Le même modèle bien réglé convient longtemps si on prend la peine de l'ajuster." },
+        { type: "h2", text: "Les réglages à faire et refaire" },
+        { type: "ul", items: ["Allonger les bretelles à chaque début d'année", "Garder la sangle de poitrine à la hauteur des aisselles", "Repositionner les sangles de compression si le volume change", "Vérifier que le sac ne descend pas sous les hanches"] },
+        { type: "h2", text: "Les signes que le sac est trop petit" },
+        { type: "p", text: "Dos déformé, fond qui remonte, cahiers qui se plient, bretelles au maximum : autant de signaux qu'il est temps de passer au volume supérieur, en suivant le tableau des tailles par âge." },
+        { type: "h2", text: "Choisir un modèle qui dure" },
+        { type: "ul", items: ["Réglage large des bretelles (grande amplitude)", "Dos et fond vraiment rigides", "Fermetures renforcées pour l'usage quotidien", "Tissu déperlant et coutures triples"] },
+        { type: "quote", text: "Un bon sac d'enfant grandit avec lui : plus de réglages réels, plus de chances qu'il survive à plusieurs rentrées." },
+        { type: "p", text: "Repérez un sac qui durera plusieurs étapes scolaires dans la catégorie Sacs à dos, et complétez avec notre tableau des tailles par âge pour un ajustement parfait." },
+      ],
+    },
+    ar: {
+      title: "حقيبة ظهر الطفل: مواكبة قامة تكبر",
+      excerpt:
+        "أشرطة، ظهر، حزام صدر: تعديلات يجب إعادتها عدة مرات في السنة ليتبعها الطفل في نموه.",
+      body: [
+        { type: "p", text: "حقيبة الظهر ليست شيئاً ثابتاً: بين الابتدائي والدخول إلى الإعدادي، يكبر الطفل عدة سنتمترات كل سنة. النموذج نفسه المضبوط جيداً يصلح طويلاً إذا أخذنا الوقت لضبطه." },
+        { type: "h2", text: "تعديلات نعيدها كلما لزم" },
+        { type: "ul", items: ["إطالة الأشرطة في بداية كل سنة", "إبقاء حزام الصدر عند مستوى الإبطين", "إعادة وضع أحزمة الضغط إذا تغير الحجم", "التأكد ألا تنزل الحقيبة تحت الوركين"] },
+        { type: "h2", text: "علامات أَن الحقيبة صغيرة جداً" },
+        { type: "p", text: "ظهر ملتوٍ، أسفل مرتفع، دفاتر تنثني، أشرطة في أقصاها: إشارات تدل أن الوقت حان للانتقال إلى حجم أكبر، متبعين جدول الأحجام حسب العمر." },
+        { type: "h2", text: "اختيار نموذج يدوم" },
+        { type: "ul", items: ["مدي تعديل واسع للأشرطة", "ظهر وأسفل صلبان فعلاً", "سحابات مقوّاة للاستعمال اليومي", "قماش طارد وخياطة ثلاثية"] },
+        { type: "quote", text: "حقيبة الطفل الجيدة تكبر معه: تعديلات حقيقية أكثر، فرص بقائها لدخولات عديدة أكبر." },
+        { type: "p", text: "ابحثوا عن حقيبة تصمد لمراحل مدرسية عدة في فئة حقائب الظهر، وأكملوا بجدولنا للأحجام حسب العمر لضبط مثالي." },
+      ],
+    },
+  },
+  {
+    slug: "sac-dos-sport-gym",
+    rubrique: "sacs-a-dos",
+    date: "2026-08-29",
+    readTime: 3,
+    faq: {
+      fr: [
+        { q: "Quelle capacité pour un sac de sport ?", a: "20 à 30 litres suffisent : maillot, serviette, chaussures dans un compartiment séparé et gourde. Au-delà, le sac devient trop lourd à porter pour rien." },
+        { q: "Où ranger les chaussures dans le sac ?", a: "Dans un compartiment ou sachet séparé, fermé hermétiquement pour éviter les odeurs et la saleté." },
+      ],
+      ar: [
+        { q: "ما سعة حقيبة الرياضة؟", a: "من 20 إلى 30 لتراً تكفي: تي شيرت، منشفة، حذاء في قسم منفصل وقارورة. فوق ذلك تصبح الحقيبة ثقيلة بلا داعٍ." },
+        { q: "أين نضع الحذاء في الحقيبة؟", a: "في قسم أو كيس منفصل مغلق بإحكام تفادياً للروائح والاتساخ." },
+      ],
+    },
+    fr: {
+      title: "Sac de sport : le compagnon du vestiaire",
+      excerpt:
+        "Maillot, serviette, chaussures, gourde : comment choisir un sac de sport pratique, facile à transporter et à nettoyer.",
+      body: [
+        { type: "p", text: "Le sac de sport accompagne les séances de gym, le foot du week-end et l'éducation physique au collège. Un bon modèle résiste aux chocs, se nettoie vite et garde les chaussures à part." },
+        { type: "h2", text: "Les compartiments qui changent tout" },
+        { type: "ul", items: ["Compartiment séparé pour les chaussures", "Poche à serviette ou poche humide", "Poche extérieure pour la gourde", "Petit compartiment pour téléphone et clés"] },
+        { type: "h2", text: "Les matières à privilégier" },
+        { type: "ul", items: ["Tissu déperlant et lavable en machine", "Fond renforcé qui ne s'abîme pas posé au sol", "Zips solides, sangle de transport pratique", "Sangle de poitrine pour la course avec le sac"] },
+        { type: "p", text: "Si le sac doit aussi transporter un cahier ou un ordinateur pour l'école, orientez-vous vers un modèle hybride du type de ceux des catégories Sacs à dos, qui combine compartiment sport et poche PC." },
+        { type: "quote", text: "Le bon sac de sport ne se juge pas à sa taille, mais à son organisation : chaque affaire à sa place, même mouillée." },
+      ],
+    },
+    ar: {
+      title: "حقيبة الرياضة: رفيق غرفة الملابس",
+      excerpt:
+        "تي شيرت، منشفة، حذاء، قارورة: كيف نختار حقيبة رياضة عملية وسهلة النقل والتنظيف.",
+      body: [
+        { type: "p", text: "ترافق حقيبة الرياضة حصص الجمباز وكرة قدم نهاية الأسبوع والتربية البدنية في الإعدادي. النموذج الجيد يقاوم الصدمات ويُغسل بسرعة ويبقي الحذاء منفصلاً." },
+        { type: "h2", text: "الأقسام التي تغيّر كل شيء" },
+        { type: "ul", items: ["قسم منفصل للحذاء", "جيب للمنشفة أو للملابس الرطبة", "جيب خارجي للقارورة", "جيب صغير للهاتف والمفاتيح"] },
+        { type: "h2", text: "الخامات المفضلة" },
+        { type: "ul", items: ["قماش طارد ويُغسل في الغسالة", "أسفل مقوّى لا يتلف عند وضعه أرضاً", "سحابات قوية وحزام حمل عملي", "حزام صدر للجري بالحقيبة"] },
+        { type: "p", text: "إن رافقت الحقيبة دفتراً أو حاسوباً خلال الدراسة، فتوجهوا نحو نموذج هجين من فئة حقائب الظهر يجمع بين قسم الرياضة وجيب الحاسوب." },
+        { type: "quote", text: "حقيبة الرياضة الجيدة لا تُقاس بحجمها بل بتنظيمها: كل أغراض في مكانها حتى المبتلة." },
+      ],
+    },
+  },
+  {
+    slug: "sac-dos-minimaliste",
+    rubrique: "sacs-a-dos",
+    date: "2026-08-29",
+    readTime: 3,
+    fr: {
+      title: "Le sac à dos minimaliste : le strict nécessaire pour l'essentiel",
+      excerpt:
+        "Moins de poches, moins de poids : le sac minimaliste pour la ville, le travail et les trajets légers, bien pensé et durable.",
+      body: [
+        { type: "p", text: "Le minimalisme appliqué au sac à dos, c'est choisir un volume juste, des poches pensées et des matières qui renvoient de vieux sacs à l'oubli. Une philosophie qui séduit autant les étudiants que les actifs." },
+        { type: "h2", text: "Les volumes d'un sac minimaliste" },
+        { type: "ul", items: ["15-20 L : trajets quotidiens, ordinateur seul", "20-25 L : travail plus documents", "25 L : le grand format d'un sac assumé"] },
+        { type: "h2", text: "La règle des trois poches" },
+        { type: "p", text: "Une grande poche centrale pour l'ordinateur, une poche plate pour les documents, une poche zippée pour le téléphone et les clés : pas besoin de plus. C'est ce qui force à trier et à ne garder que l'essentiel." },
+        { type: "h2", text: "Des matériaux qui durent" },
+        { type: "ul", items: ["Tissu technique résistant à l'usage quotidien", "Coutures renforcées au niveau des poignées", "Fond imperméable, zips durables", "Couleurs sobres qui restent élégantes plusieurs années"] },
+        { type: "quote", text: "Un sac minimaliste ne se remplit pas : il se choisit, et c'est son volume modeste qui vous rappelle de ne transporter que l'utile." },
+        { type: "p", text: "Les sacs à dos les plus durables et bien dessinés se trouvent dans la catégorie Sacs à dos. Pour un accès rapide à l'ordinateur, associez-le à votre choix de sacoche ou de sac à dos PC." },
+      ],
+    },
+    ar: {
+      title: "حقيبة ظهر بسيطة: الضروري فقط للأساسي",
+      excerpt:
+        "جيوب أقل، وزن أقل: الحقيبة البسيطة للمدينة والعمل والتنقلات الخفيفة، مدروسة ومتينة.",
+      body: [
+        { type: "p", text: "البساطة المطبقة على حقيبة الظهر تعني اختيار حجم عادل وجيوب مدروسة وخامات تُنسي الحقائب القديمة. فلسفة يجذبها الطلاب والموظفون على حدٍّ سواء." },
+        { type: "h2", text: "أحجام الحقيبة البسيطة" },
+        { type: "ul", items: ["15-20 لتراً: تنقلات يومية، حاسوب فقط", "20-25 لتراً: عمل مع وثائق", "25 لتراً: الحجم الأكبر للحقيبة الواضحة"] },
+        { type: "h2", text: "قاعدة الجيوب الثلاثة" },
+        { type: "p", text: "جيب كبير مركزي للحاسوب، جيب مسطح للمستندات، جيب بسحاب للهاتف والمفاتيح: لا حاجة لأكثر. هذا ما يفرض الغربلة والاكتفاء بالأساسي." },
+        { type: "h2", text: "خامات تدوم" },
+        { type: "ul", items: ["قماش تقني يقاوم الاستعمال اليومي", "خياطة مقوّاة عند المقابض", "أسفل مقاوم للماء وسحابات متينة", "ألوان هادئة تبقى أنيقة سنوات"] },
+        { type: "quote", text: "الحقيبة البسيطة لا تُملأ، بل تُختار، وحجمها المتواضع يذكرك ألا تحمل إلا المفيد." },
+        { type: "p", text: "أكثر حقائب الظهر متانة وجمالاً تجدونها في فئة حقائب الظهر. ولوصول سريع للحاسوب، اربطوها باختياركم بين الحقيبة الجانبية وحقيبة الظهر." },
+      ],
+    },
+  },
+  {
+    slug: "sac-pc-gaming-17",
+    rubrique: "sacs-ordinateur",
+    date: "2026-08-29",
+    readTime: 4,
+    fr: {
+      title: "Sac PC gamer : transporter un 17 pouces et ses accessoires",
+      excerpt:
+        "Grande diagonale, protection renforcée, place pour casque et périphériques : le sac pensé pour les gamers en déplacement.",
+      body: [
+        { type: "p", text: "Un ordinateur gamer pèse souvent plus de 2,5 kg, et il voyage rarement seul : casque, souris, chargeur, manette. Le sac doit donc allier protection renforcée et vraie capacité de rangement." },
+        { type: "h2", text: "Vérifier le gabarit avant tout" },
+        { type: "ul", items: ["Compartiment dimensionné pour 15,6 / 17,3 pouces réels", "Doublure épaisse qui absorbe les chocs", "Poche surélevée : l'ordinateur ne touche jamais le sol", "Vérifier le mètre du sac avec votre modèle en main"] },
+        { type: "h2", text: "L'espace pour les périphériques" },
+        { type: "ul", items: ["Poche molletonnée pour le casque", "Sachet ou compartiment pour le chargeur et les câbles", "Compartment souris et manette", "Poche avant pour documents et cartes"] },
+        { type: "h2", text: "Le confort du transport" },
+        { type: "p", text: "Avec deux à trois kilos d'équipement, les bretelles rembourrées, le dos ventilé et la sangle de poitrine deviennent indispensables. Un sac trop léger concentre tout le poids sur les épaules." },
+        { type: "quote", text: "Un sac gamer solide préférera toujours la barre de coffre au vestiaire de l'école, et votre dos vous en remerciera." },
+        { type: "p", text: "La catégorie Sacs ordinateur regroupe des modèles pour tous les gabarits. Pour les bases de la protection, relisez notre article pour choisir un sac ordinateur portable." },
+      ],
+    },
+    ar: {
+      title: "حقيبة حواسيب الألعاب: نقل شاشة 17 بوصة وملحقاتها",
+      excerpt:
+        "شاشة كبيرة، حماية معززة، مكان للسماعات والأجهزة الطرفية: حقيبة مصممة للاعبين المتنقلين.",
+      body: [
+        { type: "p", text: "يزن حاسوب الألعاب غالباً أكثر من 2.5 كغ، ونادراً ما يسافر وحده: سماعات، فأرة، شاحن، مقبض. لذا يجب أن تجمع الحقيبة بين الحماية المعززة وسعة تنظيم حقيقية." },
+        { type: "h2", text: "التحقق من المقاس أولاً" },
+        { type: "ul", items: ["قسم بمقاس 15.6 / 17.3 بوصة الفعلي", "بطانة سميكة تمتص الصدمات", "جيب مرتفع: لا يلامس الحاسوب الأرض أبداً", "قياس الحقيبة بجهازكم الموجود في اليد"] },
+        { type: "h2", text: "مساحة الأجهزة الطرفية" },
+        { type: "ul", items: ["جيب مبطن للسماعات", "كيس أو قسم للشاحن والكابلات", "قسم للفأرة والمقبض", "جيب أمامي للوثائق والبطاقات"] },
+        { type: "h2", text: "راحة النقل" },
+        { type: "p", text: "مع كيلوغرامين أو ثلاثة من العدة، تصبح الأشرطة المبطنة والظهر المهوّى وحزام الصدر ضرورية. الحقيبة الخفيفة جداً تركز الثقل كله على الكتفين." },
+        { type: "quote", text: "حقيبة ألعاب متينة تفضل جذع السيارة على غرفة الملابس المدرسية، وسيشكرك ظهرك." },
+        { type: "p", text: "تضم فئة حقائب الحواسيب نماذج لكل المقاسات. لأساسيات الحماية، أعيدوا قراءة مقالنا لاختيار حقيبة الحاسوب المحمول." },
+      ],
+    },
+  },
+  {
+    slug: "housse-ou-sac-pc",
+    rubrique: "sacs-ordinateur",
+    date: "2026-08-28",
+    readTime: 3,
+    fr: {
+      title: "Housse ou sac dédié : quelle protection pour son ordinateur ?",
+      excerpt:
+        "Housse fine, étui moussu ou sac à compartiment : quel niveau de protection selon la manière dont vous transportez votre ordinateur.",
+      body: [
+        { type: "p", text: "La housse d'ordinateur se glisse dans un autre sac ; le sac dédié protège seul. Le bon choix dépend de votre trajet et de ce que vous transportez en plus. Voici comment trancher." },
+        { type: "h2", text: "La housse : protection ciblée" },
+        { type: "ul", items: ["Étui fin pour le quotidien dans un sac déjà existant", "Gabarit exact de votre écran, pas de jeu", "Bord rembourré sur les 4 côtés", "Idéale pour protéger un ordinateur déjà partout chez vous"] },
+        { type: "h2", text: "Le sac dédié : protection et organisation" },
+        { type: "ul", items: ["Compartiment surélevé qui amortit les chocs au sol", "Place pour chargeur, documents et petite affaire", "Dos et bretelles ergonomiques", "Un seul objet à porter pour l'ordinateur et son univers"] },
+        { type: "h2", text: "Le critère décisif" },
+        { type: "p", text: "Si vous faites moins de 15 minutes à pied et gardez un sac de tous les jours, la housse suffit largement. Dès que l'ordinateur est votre seule charge ou que vous prenez les transports, un sac dédié vous protège le dos et le matériel." },
+        { type: "quote", text: "La protection ne se mesure pas à l'épaisseur de la housse, mais au fait que l'ordinateur ne bouge jamais dans son compartiment." },
+        { type: "p", text: "Entre sacoche et sac à dos, notre comparatif vous aidera sur le style de transport. Les protections et compartiments sont détaillés dans notre guide des sacs ordinateur, et les modèles dans les catégories Sacs ordinateur et Sacs à dos." },
+      ],
+    },
+    ar: {
+      title: "غطاء أم حقيبة مخصصة: أيهما يحمي حاسوبك؟",
+      excerpt:
+        "غطاء رفيع، علبة إسفنجية أم حقيبة بقسم: أي مستوى حماية حسب طريقة نقل حاسوبك.",
+      body: [
+        { type: "p", text: "غطاء الحاسوب يُوضع في حقيبة أخرى؛ والحقيبة المخصصة تحمي وحدها. الخيار الصحيح يعتمد على طريقك وما تحمله أيضاً. إليك كيف تحسم." },
+        { type: "h2", text: "الغطاء: حماية موجَّهة" },
+        { type: "ul", items: ["علبة رفيعة للاستعمال اليومي داخل حقيبة موجودة", "مقاس شاشتك بالضبط دون فراغ", "حافة مبطنة من الجوانب الأربعة", "مثالي لحماية حاسوب يتواجد في كل مكان"] },
+        { type: "h2", text: "الحقيبة المخصصة: حماية وتنظيم" },
+        { type: "ul", items: ["قسم مرتفع يمتص الصدمات أرضاً", "مكان للشاحن والمستندات والأغراض الصغيرة", "ظهر وأشرطة مريحة", "شيء واحد يحمل الحاسوب وعالمه"] },
+        { type: "h2", text: "المعيار الحاسم" },
+        { type: "p", text: "إن مشيتم أقل من 15 دقيقة وتحتفظون بحقيبة يومية، فالغطاء يكفي تماماً. ومع أن يصبح الحاسوب حملك الوحيد أو تستعملون النقل العمومي، فالحقيبة المخصصة تحمي ظهركم وعدّتكم." },
+        { type: "quote", text: "الحماية لا تقاس بسمك الغطاء، بل بأن الحاسوب لا يتحرك أبداً داخل قسمه." },
+        { type: "p", text: "بين الحقيبة الجانبية وحقيبة الظهر، ستساعدكم مقارنتنا في أسلوب النقل. الحماية والأقسام مفصلة في دليل حقائب الحواسيب، والنماذج في فئتي حقائب الحواسيب وحقائب الظهر." },
+      ],
+    },
+  },
+  {
+    slug: "sac-pc-anti-vol",
+    rubrique: "sacs-ordinateur",
+    date: "2026-08-28",
+    readTime: 3,
+    fr: {
+      title: "Sac ordinateur anti-vol : poche cachée et fermetures sécurisées",
+      excerpt:
+        "Poche arrière invisible, zips verrouillables, anneau à câble : les dispositifs simples pour transporter son portable sans stress.",
+      body: [
+        { type: "p", text: "Dans les transports et les lieux publics, l'ordinateur portable reste une cible privilégiée. Quelques dispositifs bien choisis réduisent considérablement les risques, sans transformer le sac en coffre-fort." },
+        { type: "h2", text: "Les protections à rechercher" },
+        { type: "ul", items: ["Poche arrière invisible collée au dos, impossible à ouvrir par derrière", "Zips verrouillables qui se fixent ensemble", "Anneau et câble de verrouillage pour accrocher le sac", "Doublure anti-coupe au niveau des poches principales"] },
+        { type: "h2", text: "Les bonnes habitudes" },
+        { type: "p", text: "L'ordinateur côté dos, jamais côté poche extérieure. Dans un café, posez le sac entre vos pieds et non sur une chaise voisine. Dans les transports, gardez la sangle épaule en travers du corps." },
+        { type: "h2", text: "Que choisir selon l'usage" },
+        { type: "ul", items: ["Sac à dos anti-vol pour le quotidien urbain", "Sacoche à sangles verrouillables pour les rendez-vous", "Modèles hybrides avec poche cache pour documents sensibles"] },
+        { type: "quote", text: "Le vol est rarement l'œuvre d'un coupe-fil : c'est en général une poche ouverte et un moment d'inattention qu'il faut empêcher." },
+        { type: "p", text: "La catégorie Sacs ordinateur emploie ces dispositifs sur la gamme complète. Pour le gabarit exact, relisez notre article pour choisir un sac ordinateur portable avant de commander." },
+      ],
+    },
+    ar: {
+      title: "حقيبة حاسوب ضد السرقة: جيب خفي وسحابات مؤمنة",
+      excerpt:
+        "جيب خلفي غير مرئي، سحابات قابلة للقفل، حلقة للكابل: وسائل بسيطة لنقل حاسوبكم بلا قلق.",
+      body: [
+        { type: "p", text: "في النقل العمومي والأماكن العامة، يظل الحاسوب المحمول هدفاً أساسياً. وسائل قليلة مختارة جيداً تخفف المخاطر كثيراً دون تحويل الحقيبة إلى خزنة." },
+        { type: "h2", text: "حماية يجب البحث عنها" },
+        { type: "ul", items: ["جيب خلفي غير مرئي ملاصق للظهر لا يُفتح من الخلف", "سحابات قابلة للقفل تُثبت معاً", "حلقة وكابل قفل لتعليق الحقيبة", "بطانة مضادة للقطع عند الجيوب الرئيسية"] },
+        { type: "h2", text: "عادات جيدة" },
+        { type: "p", text: "الحاسوب جهة الظهر لا جهة الجيب الخارجي. في المقهى، ضعوا الحقيبة بين أقدامكم لا على كرسي مجاور. وفي النقل، أبقوا الحزام على الصدر." },
+        { type: "h2", text: "ماذا نختار حسب الاستعمال" },
+        { type: "ul", items: ["حقيبة ظهر ضد السرقة للحياة اليومية الحضرية", "حقيبة جانبية بسحابات قابلة للقفل للمواعيد", "نماذج هجينة بها جيب استتار للمستندات الحساسة"] },
+        { type: "quote", text: "السرقة نادراً ما تكون بعمل قاطع خيوط: إنها عادة جيب مفتوح ولحظة غفلة يجب منعها." },
+        { type: "p", text: "توظف فئة حقائب الحواسيب هذه الوسائل في التشكيلة كاملة. للمقاس الدقيق، أعيدوا قراءة مقالنا لاختيار حقيبة الحاسوب المحمول قبل الطلب." },
+      ],
+    },
+  },
+  {
+    slug: "valise-ou-sac-voyage",
+    rubrique: "sacs-voyage",
+    date: "2026-08-29",
+    readTime: 4,
+    faq: {
+      fr: [
+        { q: "Valise à roulettes ou sac de voyage ?", a: "La valise pour le transport roulé, le sac pour la marche et l'organisation. Au-delà d'un week-end, la valise s'impose ; en dessous, le sac gagne." },
+        { q: "Peut-on prendre un sac en cabine ?", a: "Oui, s'il respecte les dimensions de cabine. Un sac souple se comprime et passe les contrôles plus facilement qu'une valise rigide." },
+      ],
+      ar: [
+        { q: "حقيبة بعجلات أم حقيبة سفر؟", a: "الحقيبة بعجلات للنقل المدحرج، وحقيبة الظهر للمشي والتنظيم. بعد نهاية أسبوع يستحق الجول غير المطوي؛ وتحتها تفوز الحقيبة." },
+        { q: "هل يمكن أخذ حقيبة إلى المقصورة؟", a: "نعم إذا التزمت بمقاسات المقصورة. الحقيبة المرنة تضغط وتعبر المراقبة أسهل من حقيبة صلبة." },
+      ],
+    },
+    fr: {
+      title: "Valise ou sac de voyage : comment choisir selon le séjour",
+      excerpt:
+        "Week-end, semaine ou grand voyage : les critères pour trancher entre valise à roulettes, sac de voyage et sac à dos avant de partir.",
+      body: [
+        { type: "p", text: "La valise roule, le sac se porte : la question n'est pas la mode, mais la géographie de votre voyage. Escaliers, trottoirs difficilement accessibles et transports en commun changent tout." },
+        { type: "h2", text: "Du week-end à la semaine" },
+        { type: "ul", items: ["1-3 jours : sac de voyage 20-35 L toujours suffisant", "4-7 jours : valise 55-70 L ou sac 35-50 L selon le déplacement", "Plus d'une semaine : la roulette devient indispensable"] },
+        { type: "h2", text: "Quand le sac l'emporte" },
+        { type: "p", text: "Escalier, métro, marche prolongée, train régional : le sac à dos répartit le poids et libère les mains. Il remplace la valise dès que la marche représente plus de 10 minutes du trajet." },
+        { type: "h2", text: "Quand la valise s'impose" },
+        { type: "ul", items: ["Transports par taxi ou voiture porte à porte", "Grande quantité de vêtements ou matériel volumineux", "Déplacement professionnel avec costume à l'abri des plis", "Coffre et rangement hôtelier plus faciles"] },
+        { type: "quote", text: "Le bon contenant suit le parcours : on choisit d'abord le trajet, ensuite la valise ou le sac." },
+        { type: "p", text: "Pour les séjours courts, nos articles sur le sac de voyage et week-end et le bagage en cabine détaillent les bons volumes. Les modèles des catégories Sacs de voyage et Cartables à roulettes couvrent les deux usages." },
+      ],
+    },
+    ar: {
+      title: "حقيبة بعجلات أم حقيبة سفر: كيف نختار حسب الرحلة؟",
+      excerpt:
+        "نهاية أسبوع، أسبوع أم رحلة كبيرة: معايير الحسم بين الحقيبة بعجلات وحقيبة السفر وحقيبة الظهر قبل الانطلاق.",
+      body: [
+        { type: "p", text: "الحقيبة بعجلات تتدحرج والحقيبة تُحمل: السؤال ليس موضة بل جغرافية رحلتك. السلالم والأرصفة الصعبة والنقل العمومي يغيّرون كل شيء." },
+        { type: "h2", text: "من نهاية الأسبوع إلى الأسبوع" },
+        { type: "ul", items: ["1-3 أيام: حقيبة سفر من 20-35 لتراً تكفي دائماً", "4-7 أيام: حقيبة 55-70 لتراً أو حقيبة 35-50 حسب التنقل", "أكثر من أسبوع: تصبح العجلات ضرورية"] },
+        { type: "h2", text: "متى تتفوق الحقيبة؟" },
+        { type: "p", text: "سلالم، مترو، مشي طويل، قطار جهوي: توزع حقيبة الظهر الوزن وتريح اليدين. إنها تعوّض الحقيبة بعجلات متى تجاوز المشي 10 دقائق من الطريق." },
+        { type: "h2", text: "متى تفرض الحقيبة بعجلات نفسها؟" },
+        { type: "ul", items: ["نقل بسيارة أجرة أو بنفسك من بوابة إلى بوابة", "كمية كبيرة من الملابس أو معدات ضخمة", "تنقل مهني ببدلة محفوظة من الكسور", "تخزين أفندي أسهل"] },
+        { type: "quote", text: "الحاوية الصحيحة تتبع المسار: اختاروا أولاً الطريق، ثم الحقيبة أو الجوال." },
+        { type: "p", text: "للرحلات القصيرة، يشرح مقالا حقيبة السفر وعطلة نهاية الأسبوع وبقايا المقصورة الأجناس الصحيحة. نماذج فئتي حقائب السفر والحقائب بعجلات تغطي الاستعمالين." },
+      ],
+    },
+  },
+  {
+    slug: "sac-plage-maroc",
+    rubrique: "sacs-voyage",
+    date: "2026-08-29",
+    readTime: 3,
+    fr: {
+      title: "Le sac de plage idéal au Maroc : sable, serviette et durabilité",
+      excerpt:
+        "Fond qui se vide, poche fermée pour le téléphone, matière qui sèche vite : le vrai sac pour les plages d'Agadir à Tanger.",
+      body: [
+        { type: "p", text: "Entre Agadir, Casablanca et les plages du nord, le sac de plage affronte le sable, l'eau salée et le soleil. Un bon modèle se rince, se vide et protège le téléphone et les clés." },
+        { type: "h2", text: "Les points qui font un bon sac de plage" },
+        { type: "ul", items: ["Fond perforé ou ouvert qui laisse fuir le sable", "Matériau qui sèche vite (maillage, toile enduite)", "Poche zippée et étanche pour le téléphone", "Gourde ou poche à bouteille intégrée"] },
+        { type: "h2", text: "Les contenances selon la journée" },
+        { type: "ul", items: ["10-20 L : la journée seule avec serviette", "20-35 L : famille avec jeux et parasol", "Modèle rabattable : se plie dans la valise"] },
+        { type: "p", text: "Pensez aussi à une poche pour les affaires mouillées (maillot, sandales) séparée du reste. Les maillages vivement colorés se repèrent facilement sur un sable bondé." },
+        { type: "quote", text: "Un bon sac de plage se reconnaît à ce que le sable n'y reste jamais : il le laisse fuir au lieu de le stocker." },
+        { type: "p", text: "La catégorie Sacs de voyage propose des options lavables et séchage rapide. Pour un format week-end qui accompagne aussi les escapades en ville, relisez notre guide du sac de voyage et week-end." },
+      ],
+    },
+    ar: {
+      title: "حقيبة الشاطئ المثالية في المغرب: رمل ومنشفة ومتانة",
+      excerpt:
+        "أسفل يتفرغ، جيب مغلق للهاتف، خامة تجف بسرعة: الحقيبة الحقيقية لشواطئ أكادير إلى طنجة.",
+      body: [
+        { type: "p", text: "بين أكادير والدار البيضاء وشواطئ الشمال، تواجه حقيبة الشاطئ الرمل والماء المالح والشمس. النموذج الجيد يُغسل ويُفرغ ويحمي الهاتف والمفاتيح." },
+        { type: "h2", text: "نقاط تصنع حقيبة شاطئ جيدة" },
+        { type: "ul", items: ["أسفل مثقوب أو مفتوح يطرد الرمل", "خامة تجف بسرعة (شبكة، قماش مطلي)", "جيب بسحاب ومقاوم للماء للهاتف", "قارورة أو جيب داخل القارورة"] },
+        { type: "h2", text: "السعات حسب اليوم" },
+        { type: "ul", items: ["10-20 لتراً: اليوم وحده مع منشفة", "20-35 لتراً: عائلة بلعب ومظلة", "نموذج قابل للطي: يُطوى داخل الحقيبة"] },
+        { type: "p", text: "فكروا أيضاً في جيب للأغراض الرطبة (مايوه، صندل) منفصل عن البقية. والشبكات ذات الألوان الزاهية يسهل تمييزها على رمل مزدحم." },
+        { type: "quote", text: "تُعرف حقيبة الشاطئ الجيدة بأن الرمل لا يبقى فيها أبداً: تتركه يتسرب بدل تخزينه." },
+        { type: "p", text: "تقدم فئة حقائب السفر خيارات قابلة للغسيل والجفاف السريع. ولصيغة نهاية أسبوع ترافق أيضاً الخروج إلى المدينة، أعيدوا قراءة دليل حقيبة السفر وعطلة نهاية الأسبوع." },
+      ],
+    },
+  },
+  {
+    slug: "sac-randonnee-sentiers",
+    rubrique: "sacs-voyage",
+    date: "2026-08-29",
+    readTime: 4,
+    fr: {
+      title: "Sac de randonnée : volume, portage et organisation en rando",
+      excerpt:
+        "20 à 40 litres selon la sortie, dos ajustable, ceinture et accessoires externes : le sac de rando enfin bien choisi.",
+      body: [
+        { type: "p", text: "Randonnée à la journée dans l'Atlas ou bivouac de deux nuits : le sac se choisit en fonction du temps passé sur les sentiers, du poids transporté et du portage qu'il offre." },
+        { type: "h2", text: "Le volume selon la sortie" },
+        { type: "ul", items: ["15-25 L : randonnée à la journée, spectacle léger", "30-40 L : randonnée d'un ou deux jours, affaires complètes", "50 L et plus : bivouac et grandes traversées"] },
+        { type: "h2", text: "Le portage abdominal et dorsal" },
+        { type: "p", text: "Au-delà de 8 kg, une ceinture de hanche est indispensable pour transférer le poids vers les hanches. Un dos réglable en hauteur (platine déplaçable) ajuste le sac à votre buste, même sur les montées raides." },
+        { type: "h2", text: "L'organisation sur le sentier" },
+        { type: "ul", items: ["Poche du haut pour les accessoires de premier secours", "Poches latérales pour bouteilles que l'on attrape d'une main", "Points d'attache externes (bâtons, tapis, tente)", "Sangles de compression qui stabilisent à chaque charge"] },
+        { type: "quote", text: "En randonnée, tout bonus de poids est payé en sueur : le sac idéal est celui que l'on n'a pas envie d'alléger aux deux tiers du chemin." },
+        { type: "p", text: "La catégorie Sacs de voyage inclut ces modèles de randonnée. Pour les formats urbains et professionnels du même volume, notre article sur le sac à dos et notre guide des sacs à dos restent utiles." },
+      ],
+    },
+    ar: {
+      title: "حقيبة التنزه: الحجم والحمل والتنظيم في الرحلات",
+      excerpt:
+        "من 20 إلى 40 لتراً حسب الخروج، ظهر قابل للتعديل، حزام وأكسسوارات خارجية: حقيبة التنزه المختارة أخيراً جيداً.",
+      body: [
+        { type: "p", text: "تنزه يومي في الأطلس أم تخييم ليلتين: تُختار الحقيبة حسب الوقت على المسالك والوزن المنقول والحمل الذي تقدمه." },
+        { type: "h2", text: "الحجم حسب الخروج" },
+        { type: "ul", items: ["15-25 لتراً: خروج يومي، مشهد خفيف", "30-40 لتراً: خروج يوم أو يومين بأغراض كاملة", "50 لتراً فأكثر: تخييم ومسارات كبيرة"] },
+        { type: "h2", text: "الحمل البطني والظهري" },
+        { type: "p", text: "بعد 8 كغ، يلزم حزام حوض لنقل الوزن نحو الوركين. والظهر القابل للتعديل في الارتفاع (لوحة متحركة) يكيَّف الحقيبة مع جذعك حتى في الصعود الحاد." },
+        { type: "h2", text: "التنظيم على المسلك" },
+        { type: "ul", items: ["جيب علوي لمعدات الإسعافات الأولية", "جيوب جانبية لقوارير تُلتقط بيد واحدة", "نقاط ربط خارجية (عصي، حصيرة، خيمة)", "أحزمة ضغط تثبت عند كل تحميل"] },
+        { type: "quote", text: "في التنزه، كل وزن زائد يدفع بعرق: الحقيبة المثالية هي التي لا تميل لتخفيفها في ثلثي الطريق." },
+        { type: "p", text: "تضم فئة حقائب السفر هذه النماذج. ولأشكال المدن والعمل من نفس الحجم، يبقى مقالنا عن حقيبة الظهر ودليل حقائب الظهر مفيدين." },
+      ],
+    },
+  },
+  {
+    slug: "gourde-ecole-isotherme",
+    rubrique: "accessoires",
+    date: "2026-08-29",
+    readTime: 3,
+    faq: {
+      fr: [
+        { q: "Quelle contenance pour la gourde d'école ?", a: "500 ml à 1 litre : 500 ml pour le primaire, 750 ml à 1 L pour le collège et le lycée. Plus, c'est du poids inutile dans le cartable." },
+        { q: "Inox, plastique ou aluminium ?", a: "L'inox isole et dure, l'acier sans BPA convient aux petits, l'aluminium isotherme est léger. Évitez le plastique jetable." },
+      ],
+      ar: [
+        { q: "ما سعة قارورة المدرسة؟", a: "من 500 مل إلى 1 لتر: 500 مل للابتدائي، و750 مل إلى 1 لتر للإعدادي والثانوي. أكثر من ذلك وزن زائد في الحقيبة." },
+        { q: "خزن أم بلاستيك أم ألمنيوم؟", a: "الخزن يعزل ويدوم، والفولاذ الخالّ من BPA يناسب الصغار، والألمنيوم الحراري خفيف. تجنبوا البلاستيك الوصف." },
+      ],
+    },
+    fr: {
+      title: "Gourde d'école : quelle contenance, quel matériau, quelle marque",
+      excerpt:
+        "500 ml ou 1 litre, inox ou plastique sans BPA : les repères simples pour choisir la gourde qui accompagne l'enfant toute l'année.",
+      body: [
+        { type: "p", text: "La gourde remplace les bouteilles jetables et se glisse dans la poche latérale du cartable. Encore faut-il choisir une contenance, un matériau et une étanchéité adaptés à l'âge de l'enfant." },
+        { type: "h2", text: "La contenance qui convient" },
+        { type: "ul", items: ["Petite section-CE2 : 400 à 500 ml suffisent", "CM1-collège : 500 à 750 ml", "Lycée et sport : 750 ml à 1 litre"] },
+        { type: "h2", text: "Le matériau de la gourde" },
+        { type: "ul", items: ["Inox isotherme : boisson fraîche ou chaude des heures", "Acier et plastique sans BPA : léger et résistant", "Bec ouvre-fermant anti-fuite garanti par la marque", "Étanchéité à vérifier tête en bas dans un sac"] },
+        { type: "p", text: "Privée de son emballage jetable, l'école accueille aussi de plus en plus de gourdes dans les salles de classe. Comptez aussi une poche latérale extérieure du cartable pour la tenir à la verticale, bien visible et sans fuite." },
+        { type: "quote", text: "La bonne gourde ne se répare pas seulement à la chaleur : elle se lave facilement, fuit rarement et se repère au fond du cartable." },
+        { type: "p", text: "La catégorie Trousses et accessoires inclut nos gourdes et boîtes à goûter assorties. Pour compléter le contenu du sac, suivez notre liste fournitures par niveau." },
+      ],
+    },
+    ar: {
+      title: "قارورة المدرسة: أي سعة وأي خامة وأي علامة",
+      excerpt:
+        "500 مل أم 1 لتر، خزن أم بلاستيك خالٍ من BPA: معايير بسيطة لاختيار القارورة التي ترافق الطفل طوال السنة.",
+      body: [
+        { type: "p", text: "تعوّض القارورة الزجاجات الوصفية وتوضع في الجيب الجانبي للحقيبة. ويجب اختيار سعة وخامة وإحكام يناسب سن الطفل." },
+        { type: "h2", text: "السعة المناسبة" },
+        { type: "ul", items: ["روض-سنة ثالثة: 400 إلى 500 مل تكفي", "سنة رابعة-إعدادي: 500 إلى 750 مل", "ثانوي ورياضة: 750 مل إلى 1 لتر"] },
+        { type: "h2", text: "خامة القارورة" },
+        { type: "ul", items: ["خزن حراري: مشروب بارد أو ساخن لساعات", "فولاذ وبلاستيك خالٍ من BPA: خفيف ومتين", "فوهة تفتح وتغلق مانعة للتسرب", "إحكام يُختبر مقلوباً داخل الحقيبة"] },
+        { type: "p", text: "دون غلافها الوصفي، تستقبل المدارس قارورات أكثر في الأقسام. واحتسبوا أيضاً جيباً جانبياً خارجياً للحقيبة لتثبيتها عمودياً وظاهرة دون تسرب." },
+        { type: "quote", text: "القارورة الجيدة لا تُصلح بالحرارة فقط: بل تُغسل بسهولة، نادراً ما تتسرب، وتظهر في قاع الحقيبة." },
+        { type: "p", text: "تضم فئة المقالم والمستلزمات قاروراتنا وعلب الوجبات المتطابقة. ولإكمال محتوى الحقيبة، اتبعوا قائمتنا باللوازم حسب المستوى." },
+      ],
+    },
+  },
+  {
+    slug: "boite-gouter-enfant",
+    rubrique: "accessoires",
+    date: "2026-08-29",
+    readTime: 3,
+    fr: {
+      title: "Boîte à goûter : les bonnes portions et le contenant adapté",
+      excerpt:
+        "Dimensions du sac, étanchéité, compartiments : comment choisir la boîte qui protège le goûter sans alourdir le cartable.",
+      body: [
+        { type: "p", text: "La boîte à goûter doit entrer dans le cartable, rester étanche et ne pas ajouter de poids. Un choix réfléchi évite les paquets écrasés et les contenus répandus en classe." },
+        { type: "h2", text: "Le bon format selon le goûter" },
+        { type: "ul", items: ["Boîte plate simple : biscottes, fruits secs", "Boîte à compartiments : fruit, sandwich et goûter", "Petit bol isotherme : fromage blanc, soupe lors des sorties"] },
+        { type: "h2", text: "Les critères à vérifier" },
+        { type: "ul", items: ["Dimensions adaptées à la poche latérale du cartable", "Étanchéité garantie même retournée", "Ouverture facile pour des petites mains", "Matériau sans BPA, frais au plat ou au lave-vaisselle"] },
+        { type: "p", text: "Répartir les portions dans plusieurs petites boîtes, c'est aussi répartir le poids dans le cartable et limiter les chocs. Une boîte trop grande se laisse écraser par les cahiers de l'après-midi." },
+        { type: "quote", text: "Un goûter ne se mesure pas à la contenance de la boîte, mais à son contenant : adapté, il protège et se lave en un tour d'eau." },
+        { type: "p", text: "Notre catégorie Trousses et accessoires propose boîtes à goûter et gourdes assorties. Pour la trousse complète, revoyez notre article sur les trousses garnies." },
+      ],
+    },
+    ar: {
+      title: "علبة وجبة الأطفال: الحصص الصحيحة والحاوية المناسبة",
+      excerpt:
+        "أبعاد الحقيبة، الإحكام، الأقسام: كيف نختار العلبة التي تحمي الوجبة دون إثقال الحقيبة.",
+      body: [
+        { type: "p", text: "يجب أن تدخل علبة الوجبة إلى الحقيبة، وتبقى محكمة، وألا تضيف وزناً. اختيار مدروس يتفادى الأكياس المضغوطة والحمولات المتناثرة داخل القسم." },
+        { type: "h2", text: "الشكل المناسب حسب الوجبة" },
+        { type: "ul", items: ["علبة مسطحة بسيطة: بسكويت، فواكه جافة", "علبة بأقسام: فواكه وساندويتش ووجبة", "وعاء حراري صغير: جبن، شوربة في الخروجات"] },
+        { type: "h2", text: "معايير يجب التحقق منها" },
+        { type: "ul", items: ["أبعاد مناسبة للجيب الجانبي للحقيبة", "إحكام مضمون حتى مقلوبة", "فتح سهل ليدين صغيرتين", "خامة خالية من BPA وقابلة للغسيل"] },
+        { type: "p", text: "توزيع الحصص في علب صغيرة متعددة يوزع الوزن في الحقيبة ويحد من الصدمات. فالعلبة الكبيرة جداً تنضغط تحت دفاتر بعد الظهر." },
+        { type: "quote", text: "لا تُقاس الوجبة بسعة العلبة، بل بحاويتها: مناسبة، تحمي وتُغسل بغسلة ماء." },
+        { type: "p", text: "تقدم فئة المقالم والمستلزمات علب وجبات وقارورات متطابقة. وللمقلمة الكاملة، راجعوا مقالنا عن المقالم الكاملة." },
+      ],
+    },
+  },
+  {
+    slug: "porte-cartable-reflechissant",
+    rubrique: "accessoires",
+    date: "2026-08-28",
+    readTime: 3,
+    fr: {
+      title: "Porte-cartable réfléchissant : la sécurité de l'enfant sur la route",
+      excerpt:
+        "Bandes réfléchissantes, jambières de pouce et sangles : l'accessoire qui rend l'enfant visible avant même le lever du jour.",
+      body: [
+        { type: "p", text: "À l'aube d'hiver, quand les jours raccourcissent, l'enfant se rend à l'école à pied ou à vélo aux heures sombres. Le porte-cartable réfléchissant l'équipe en visibilité sans qu'il pense à quoi que ce soit." },
+        { type: "h2", text: "Ce que la visibilité change" },
+        { type: "ul", items: ["Un conducteur perçoit la bande réfléchissante jusqu'à 150 m", "Les couleurs vives (orange, jaune) marchent de jour comme de nuit", "Le mouvement des bras et des jambes renforce la détection", "L'enfant est visible par les côtés et par derrière"] },
+        { type: "h2", text: "Comment ça fonctionne" },
+        { type: "ul", items: ["Bandes à glisser sur les jambes ou les bras du vêtement", "Housses réfléchissantes pour le cartable lui-même", "Sangles de poitrine avec matériau rétroréfléchissant", "Attaches sur le vélo ou la trottinette selon l'usage"] },
+        { type: "quote", text: "La meilleure protection du piéton, c'est d'abord d'être vu : un porte-cartable réfléchissant ne coûte rien et peut tout changer." },
+        { type: "p", text: "Un accessoire qui complète le trousseau de l'enfant avec nos étiquettes et le reste des fournitures de la catégorie Trousses et accessoires." },
+      ],
+    },
+    ar: {
+      title: "حمالة حقيبة عاكسة: سلامة الطفل في الطريق",
+      excerpt:
+        "شرائط عاكسة، أرجل إبهام وأحزمة: الأكسسوار الذي يجعل الطفل مرئياً قبل شروق الشمس.",
+      body: [
+        { type: "p", text: "في فجر الشتاء حين تقصر الأيام، يتوجه الطفل إلى المدرسة مشياً أو بالدراجة في ساعات ضبابية. تجهزه حمالة الحقيبة العاكسة بالرؤية دون أن يفكر في شيء." },
+        { type: "h2", text: "ما الذي تغيره الرؤية" },
+        { type: "ul", items: ["يبصر السائق الشريط العاكس حتى 150 م", "الألوان الزاهية (برتقالي، أصفر) تصلح ليلاً ونهاراً", "حركة الذراعين والرجلين تقوي الاكتشاف", "الطفل مرئي من الجوانب ومن الخلف"] },
+        { type: "h2", text: "كيف تعمل" },
+        { type: "ul", items: ["شرائط تُوضع على الساقين أو الذراعين", "أغطية عاكسة للحقيبة نفسها", "أحزمة صدر بخامة راجعة للضوء", "مثبتات على الدراجة أو الدراجة البخارية حسب الاستعمال"] },
+        { type: "quote", text: "أفضل حماية للمشاة هي أن يكون مرئياً أولاً: حمالة عاكسة لا تكلف شيئاً وقد تغير كل شيء." },
+        { type: "p", text: "أكسسوار يكمل ملابس الطفل مع ملصقاتنا وبقية لوازم فئة المقالم والمستلزمات." },
+      ],
+    },
+  },
+  {
+    slug: "protege-cahiers",
+    rubrique: "accessoires",
+    date: "2026-08-28",
+    readTime: 3,
+    fr: {
+      title: "Protège-cahiers : l'allié discret des cartables bien tenus",
+      excerpt:
+        "Transparents, souples ou plastifiés : pourquoi et comment protéger les cahiers des cours pour qu'ils traversent l'année.",
+      body: [
+        { type: "p", text: "Le protège-cahier est souvent le premier accessoire de la liste de rentrée, et le premier à être abandonné en cours d'année. Correctement choisi, il préserve les copies et range les cours." },
+        { type: "h2", text: "Les avantages d'un bon protège-cahier" },
+        { type: "ul", items: ["Couvre-lettre qui ne prend pas la poussière et se nettoie", "Transparence pour identifier la matière sans ouvrir", "Renfort des coins, les premiers à s'abîmer", "Durée de vie : un protège par cahier, toute l'année"] },
+        { type: "h2", text: "Les types à connaître" },
+        { type: "ul", items: ["Souple (classeur PVC) : léger, s'adapte à tous les formats", "Plastifié fin et transparent : le plus courant", "Chemise à rabats pour les feuilles volantes", "Étiquette ou zone à écrire pour le nom et la matière"] },
+        { type: "p", text: "Écrivez toujours le nom, la matière et la classe sur l'étiquette : avec les protège-cahiers, l'école où chacun range son ardoise s'anime et tout se retrouve plus vite." },
+        { type: "quote", text: "Un cahier protégé dure une année ; un cahier protégé et étiqueté évite trois semaines de recherches en septembre." },
+        { type: "p", text: "La catégorie Trousses et accessoires contient protège-cahiers, étiquettes et kits assortis. Pour le reste du contenu du cartable, suivez notre liste fournitures par niveau." },
+      ],
+    },
+    ar: {
+      title: "أغلفة الدفاتر: الحليف الصامت لحقائب منظمة",
+      excerpt:
+        "شفافة، مرنة أو مغلفة: لماذا وكيف نحمي دفاتر الدروس لتجتاز السنة.",
+      body: [
+        { type: "p", text: "غلاف الدفتر غالباً أول أكسسوار في قائمة الدخول، وأول ما يُهمل في منتصف السنة. مختار جيداً، يحفظ النسخ ويرتب الدروس." },
+        { type: "h2", text: "مزايا غلاف جيد" },
+        { type: "ul", items: ["غلاف لا يجمع الغبار ويُغسل", "شفافية لتمييز المادة دون فتح", "تعزيز الزوايا، وهي أول ما يتلف", "العمر: غلاف لكل دفتر طوال السنة"] },
+        { type: "h2", text: "الأنواع المعروفة" },
+        { type: "ul", items: ["مرن (PVC): خفيف ويناسب كل المقاسات", "مغلف رفيع شفاف: الأكثر شيوعاً", "حقيبة بأوشحة للأوراق الطائرة", "ملصق أو منطقة كتابة للاسم والمادة"] },
+        { type: "p", text: "اكتبوا دائماً الاسم والمادة والقسم على الملصق: ومع الأغلفة، يجد الكل أغراضه أسرع." },
+        { type: "quote", text: "دفتر مغلف يدوم سنة؛ ودفتر مغلف ومعلم يتفادى ثلاثة أسابيع من البحث في شتنبر." },
+        { type: "p", text: "تحتوي فئة المقالم والمستلزمات على أغلفة وملصقات ومجموعات متطابقة. لبقية محتوى الحقيبة، اتبعوا قائمتنا باللوازم حسب المستوى." },
+      ],
+    },
+  },
+  {
+    slug: "entretien-nettoyage-sac",
+    rubrique: "guides",
+    date: "2026-08-28",
+    readTime: 4,
+    faq: {
+      fr: [
+        { q: "Peut-on laver un sac à dos en machine ?", a: "Souvent oui, à basse température et en cycle doux, à condition de le mettre dans une housse ou un drap. Lisez toujours l'étiquette d'entretien." },
+        { q: "Comment enlever une tache d'encre du cartable ?", a: "Tamponnez immédiatement avec un chiffon humide et de l'alcool à 90° sans frotter, puis rincez à l'eau claire." },
+      ],
+      ar: [
+        { q: "هل تغسل حقيبة الظهر في الغسالة؟", a: "نعم غالباً، على حرارة منخفضة وببرنامج لطيف، بشرط وضعها في كيس أو شرشف غسيل. اقرأوا دائماً ملصق الصيانة." },
+        { q: "كيف نزيل بقع الحبر من الحقيبة؟", a: "انبشوا فوراً بقطعة قماش مبللة وكحول 90 درجة دون فرك، ثم اشطفوا بماء نقي." },
+      ],
+    },
+    fr: {
+      title: "Entretenir et nettoyer son sac : mode d'emploi par matière",
+      excerpt:
+        "Toile, cuir, maillage, doublure : les bons gestes pour garder un sac propre et en bon état toute l'année scolaire.",
+      body: [
+        { type: "p", text: "Un sac bien entretenu garde son apparence et ses qualités techniques. La règle de base : adaptez toujours le nettoyage à la matière, jamais l'inverse." },
+        { type: "h2", text: "Selon la matière" },
+        { type: "ul", items: ["Toile synthétique et Oxford : lavage doux, séchage à l'air libre", "Coton enduit : chiffon humide, pas de machine", "Cuir ou similicuir : linge doux et savon spécial", "Maillage : rinçage à l'eau claire seulement"] },
+        { type: "h2", text: "L'entretien régulier" },
+        { type: "ul", items: ["Brosser le fond et les bretelles chaque semaine", "Vider le sac les vendredis et le secouer", "Réparer les coutures qui s'effilochent avant qu'elles ne cassent", "Nourrir le cuir deux fois par an"] },
+        { type: "p", text: "Pour les taches tenaces, agissez vite : une tache fraîche se retire toujours mieux. Évitez le sèche-linge et le soleil brûlant, qui déforment les matières techniques et délavent les couleurs." },
+        { type: "quote", text: "L'entretien d'un sac, c'est dix minutes par semaine qui évitent de le remplacer en cours d'année." },
+        { type: "p", text: "Un doute sur la matière ? Consultez la fiche produit dans nos catégories Sacs à dos, Sacs ordinateur et Sacs de voyage, qui détaille les consignes d'entretien des modèles." },
+      ],
+    },
+    ar: {
+      title: "صيانة الحقيبة وتنظيفها: طريقة العمل حسب الخامة",
+      excerpt:
+        "قماش، جلد، شبكة، بطانة: الحركات الصحيحة لتبقى الحقيبة نظيفة بحالة جيدة طوال السنة الدراسية.",
+      body: [
+        { type: "p", text: "الحقيبة التي تُعتنى بها تحتفظ بمظهرها وخصائصها التقنية. القاعدة الأساسية: لئن تناسب التنظيف الخامة دائماً لا العكس." },
+        { type: "h2", text: "حسب الخامة" },
+        { type: "ul", items: ["قماش صناعي وأكسفورد: غسيل لطيف وتجفيف في الهواء", "قطن مطلي: قطعة مبللة، دون غسالة", "جلد أو جلد صناعي: قماش ناعم وصابون خاص", "شبكة: شطف بماء نقي فقط"] },
+        { type: "h2", text: "الصيانة المنتظمة" },
+        { type: "ul", items: ["فرشاة للأسفل والأشرطة كل أسبوع", "تفريغ الحقيبة أيام الجمعة ورجّها", "إصلاح الخياطة المتآكلة قبل القص", "تغذية الجلد مرتين في السنة"] },
+        { type: "p", text: "لبقع عنيدة، تصرفوا بسرعة: البقع الحديثة تُزال دائماً أحسن. وتجنبوا المجفف والشمس الحارقة اللذين يشوهان الخامات التقنية ويبهتان الألوان." },
+        { type: "quote", text: "صيانة الحقيبة عشر دقائق أسبوعياً تتفادى تعويضها في منتصف السنة." },
+        { type: "p", text: "شك في الخامة؟ راجعوا بطاقة المنتج في فئات حقائب الظهر، حقائب الحواسيب وحقائب السفر التي تفصل تعليمات صيانة النماذج." },
+      ],
+    },
+  },
+  {
+    slug: "acheter-sac-en-ligne-maroc",
+    rubrique: "guides",
+    date: "2026-08-29",
+    readTime: 4,
+    fr: {
+      title: "Acheter son cartable en ligne au Maroc : livraison et paiement à la réception",
+      excerpt:
+        "Cod, livraison en ville et en région, échange : comment commander son sac en ligne sans risque depuis Rabat à Agadir.",
+      body: [
+        { type: "p", text: "Commander un cartable en ligne au Maroc demande trois vérifications : le paiement à la livraison, les délais et les conditions d'échange. Bien préparées, elles transforment l'achat en simple formalité." },
+        { type: "h2", text: "Le paiement à la réception" },
+        { type: "ul", items: ["Le paiement contre livraison (cod) reste le réflexe le plus rassurant", "Payez à la réception après avoir vérifié le produit", "Conservez le bon de livraison et la facture", "Aucun prépaiement demandé pour un simple sac"] },
+        { type: "h2", text: "Livraison et délais" },
+        { type: "ul", items: ["Casablanca, Rabat, Marrakech, Tanger : livraison sous 2-3 jours", "Agadir, Fès, Meknès, Oujda : 3-5 jours", "Lieux éloignés et villages : réseaux de coursiers et agences", "Suivi du colis par code sur la page dédiée"] },
+        { type: "h2", text: "La bonne commande" },
+        { type: "ul", items: ["Vérifier le gabarit et la capacité sur la fiche produit", "Relire la politique d'échange si la taille ne convient pas", "Comparer avec le tableau des tailles par âge", "Garder le cartable dans son emballage d'origine en cas d'échange"] },
+        { type: "quote", text: "Le bon achat en ligne se joue avant le clic : taille vérifiée, paiement à la réception et politique d'échange lue." },
+        { type: "p", text: "Toutes les fiches de nos catégories Cartables, Sacs à dos, Sacs ordinateur, Sacs de voyage et Trousses indiquent capacités, tailles et délais de livraison par ville au Maroc." },
+      ],
+    },
+    ar: {
+      title: "شراء الحقيبة أونلاين في المغرب: توصيل ودفع عند الاستلام",
+      excerpt:
+        "الدفع عند الاستلام، التوصيل في المدن والأقاليم، الإرجاع: كيف تطلبون حقيبتكم دون مخاطرة من الرباط إلى أكادير.",
+      body: [
+        { type: "p", text: "طلب حقيبة أونلاين في المغرب يتطلب ثلاث تحققات: الدفع عند الاستلام، المدة وشروط الإرجاع. منظمة جيداً، تتحول العملية إلى إجراء بسيط." },
+        { type: "h2", text: "الدفع عند الاستلام" },
+        { type: "ul", items: ["الدفع عند الاستلام يبقى أكثر العادات طمأنينة", "اذفعوا عند الاستلام بعد التحقق من المنتج", "احتفظوا بورقة التسليم والفاتورة", "لا دفعة مسبقة مطلوبة لحقيبة بسيطة"] },
+        { type: "h2", text: "التوصيل والمدة" },
+        { type: "ul", items: ["الدار البيضاء والرباط ومراكش وطنجة: توصيل 2-3 أيام", "أكادير وفاس ومكناس ووجدة: 3-5 أيام", "الأماكن النائية والقرى: شبكات السعاة والوكالات", "تتبع الطرد برمز في الصفحة المخصصة"] },
+        { type: "h2", text: "الطلب الصحيح" },
+        { type: "ul", items: ["التحقق من المقاس والسعة في بطاقة المنتج", "إعادة قراءة سياسة الإرجاع إن لم يناسب المقاس", "المقارنة بجدول الأحجام حسب العمر", "إبقاء الحقيبة في غلافها الأصلي للإرجاع"] },
+        { type: "quote", text: "الشراء الجيد أونلاين يُحسم قبل النقر: مقاس متحقق منه، دفع عند الاستلام وسياسة إرجاع مقروءة." },
+        { type: "p", text: "توضح كل بطاقات فئات الحقائب المدرسية، حقائب الظهر، حقائب الحواسيب، حقائب السفر والمقالم السعات والأحجام ومدة التوصيل حسب المدينة في المغرب." },
+      ],
+    },
+  },
+  {
+    slug: "budget-fournitures-rentree",
+    rubrique: "guides",
+    date: "2026-08-29",
+    readTime: 4,
+    faq: {
+      fr: [
+        { q: "Quel budget fournitures pour une rentrée raisonnable ?", a: "Entre 800 et 1 500 DH selon le niveau : cartable, trousse, protège-cahiers et petites fournitures. Le gros poste reste souvent le cartable pour le primaire." },
+        { q: "Comment réduire le budget fournitures ?", a: "Réutilisez gommes, règles, ciseaux et trousses en bon état, achetez tôt, et n'achetez le cartable neuf que s'il est réellement nécessaire." },
+      ],
+      ar: [
+        { q: "ما ميزانية لوازم الدخول المعقولة؟", a: "بين 800 و1500 درهم حسب المستوى: حقيبة، مقلمة، أغلفة ولوازم صغيرة. ويظل القسط الأكبر الحقيبة في الابتدائي غالباً." },
+        { q: "كيف نقلل ميزانية اللوازم؟", a: "أعيدوا استعمال الممحاة والمسطرة والمقص والمقلمات السليمة، واشتروا مبكراً، ولا تشتروا حقيبة جديدة إلا عند الحاجة الحقيقية." },
+      ],
+    },
+    fr: {
+      title: "Budget rentrée scolaire : maîtriser les dépenses du sac à la trousse",
+      excerpt:
+        "Où va l'argent de la rentrée, ce qui peut être réutilisé et ce qui mérite d'être neuf : un plan simple pour dépenser juste.",
+      body: [
+        { type: "p", text: "La rentrée pèse sur le budget familial, mais les dépenses ne sont pas toutes obligatoires. Quelques réflexes simples permettent de réserver le neuf à ce qui s'use vraiment : le cartable." },
+        { type: "h2", text: "Ce qu'il faut acheter neuf" },
+        { type: "ul", items: ["Cartable et sac à dos : la seule vraie dépense renouvelable", "Protège-cahiers et cahiers de l'année", "Chaussures et tenues scolaires", "Gourde si l'ancienne fuit ou est trop petite"] },
+        { type: "h2", text: "Ce qui se réutilise sans souci" },
+        { type: "ul", items: ["Gommes, règles, ciseaux, trousses en bon état", "Calculatrice et matériel technique", "Classeurs et reliures d'année en année", "Stylos et surligneurs non terminés"] },
+        { type: "h2", text: "Le calendrier qui économise" },
+        { type: "p", text: "Achetez le cartable en première quinzaine d'août, quand les stocks sont complets et les prix stables, et les fournitures en septembre une fois les promotions lancées. Évitez la semaine précédant la rentrée, la plus chère." },
+        { type: "quote", text: "Le vrai budget malin n'est pas dans une petite dépense, mais dans la question de savoir ce qui mérite vraiment d'être neuf." },
+        { type: "p", text: "La liste complète par niveau se trouve dans notre article sur les fournitures scolaires, avec le cartable neuf choisi dans nos catégories selon le tableau des tailles par âge." },
+      ],
+    },
+    ar: {
+      title: "ميزانية الدخول المدرسي: التحكم في النفقات من الحقيبة إلى المقلمة",
+      excerpt:
+        "أين تذهب أموال الدخول، ما الذي يُعاد استعماله وما الذي يستحق الجديد: خطة بسيطة لنفقة عادلة.",
+      body: [
+        { type: "p", text: "يثقل الدخول المدرسي ميزانية الأسرة، لكن ليست كل النفقات إلزامية. عادات بسيطة تكفي لحجز الجديد لما يهترئ حقاً: الحقيبة." },
+        { type: "h2", text: "ما يجب شراؤه جديداً" },
+        { type: "ul", items: ["الحقيبة المدرسية وحقيبة الظهر: النفقة الوحيدة المتجددة حقاً", "أغلفة الدفاتر ودفاتر السنة", "أحذية وملابس مدرسية", "قارورة إذا كانت القديمة تتسرب أو صغيرة"] },
+        { type: "h2", text: "ما يُعاد استعماله دون قلق" },
+        { type: "ul", items: ["ممحاة، مسطرة، مقص، مقلمات بحالة جيدة", "آلة حاسبة ومواد تقنية", "ملفات ومجلدات من سنة إلى أخرى", "أقلام وماركر غير منتهية"] },
+        { type: "h2", text: "التقويم الذي يوفر" },
+        { type: "p", text: "اشتروا الحقيبة في النصف الأول من غشت حين تكتمل المخازن وتستقر الأسعار، واللوازم في شتنبر بعد انطلاق التخفيضات. وتجنبوا الأسبوع الذي يسبق الدخول، وهو الأعلى سعراً." },
+        { type: "quote", text: "الميزانية الذكية ليست في مصروف صغير، بل في سؤال: ما الذي يستحق حقاً أن يكون جديداً." },
+        { type: "p", text: "القائمة الكاملة حسب المستوى موجودة في مقال اللوازم المدرسية، مع حقيبة جديدة من فئاتنا وفق جدول الأحجام حسب العمر." },
+      ],
+    },
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
